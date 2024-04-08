@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar{
+    background-color: #F9A80C;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.navbar ul{
+    display: flex;
+    list-style: none;
+}
+
+.navbar a, h1{
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 1.2rem;
+    
+}
+
+.navbar a:hover{
+    color: #000000;
+    text-decoration: underline;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
