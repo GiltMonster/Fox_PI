@@ -1,11 +1,11 @@
 <?php
 session_start(); //inicia a sessão
-require_once('conexao.php'); //inclui os metodos de conexão do arquivo conexao.php
+require_once('./conexao.php'); //inclui os metodos de conexão do arquivo conexao.php
 
-if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
-    header('Location:login.php'); //redireciona para a página login.php
-    exit(); //finaliza a execução do script
-}
+// if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
+//     header('Location: ./login.php'); //redireciona para a página login.php
+//     exit(); //finaliza a execução do script
+// }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
     $nome = $_POST['nome']; //recebe o nome do produto
@@ -15,24 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
 
     $imagem = $_FILES['imagem']['name']; //recebe o nome do arquivo da imagem
 
-    $target_dir = "./uploads/"; //diretório onde a imagem será salva
-    $target_file = $tareget_dir . basename($imagem); //caminho completo do arquivo da imagem
-
-    $base_url = "http://localhost/Alpha/"; //URL da imagem
-
-    $url_imagem_produtos = $base_url . "uploads/" . $imagem; //caminho completo da imagem
-
-    //mover o arquivo de imagem carregado para o diretorio de destino
-    if (move_uploaded_file($_FILES['imagem']['tmp_name'], $target_file)) { //manda a imagem para um arquivo temporar
-        echo "<p>Imagem " . basename($imagem) . " foi carregada com sucesso!</p>";
-    } else {
-        echo "Falha ao carregar " . basename($imagem) . " ,tente novamente!";
+    if(move_uploaded_file($_FILES['imagem']['tmp_name'], $target_file)){ //manda a imagem para um arquivo temporar
+        echo "<p>Imagem ".basename( $imagem )." foi carregada com sucesso!</p>";
+    }else{
+        echo $target_file;
+        echo "Falha ao carregar ".basename( $imagem )." ,tente novamente!";
     }
 
     try {
 
-        $sql = "INSERT INTO Produtos (NOME_PRODUTO, DESCRICAO_PRODUTO, PRECO_PRODUTO, IMAGEM_PRODUTO, URL_IMAGEM_PRODUTO) 
-        VALUES (:nome, :descricao, :preco, :imagem, :url_img)"; //consulta SQL
+        $sql = "INSERT INTO PRODUTO(`CATEGORIA_ID`, `PRODUTO_ATIVO`, `PRODUTO_DESC`, `PRODUTO_DESCONTO`, `PRODUTO_ID`, `PRODUTO_NOME`, `PRODUTO_PRECO`) VALUES (:nome, :descricao, :preco, :imagem, :url_img)"; //consulta SQL
         $query = $pdo->prepare($sql); //prepara a consulta SQL
 
         $query->bindParam(':nome', $nome, PDO::PARAM_STR); //substitui o parâmetro :nome pelo valor da variável $nome
@@ -42,19 +34,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
         $query->bindParam(':url_img', $url_imagem_produtos, PDO::PARAM_STR); //substitui o parâmetro :url_img pelo valor da variável $url_imagem_produtos
         $query->execute(); //executa a consulta SQL
 
-        echo "<p style='color:green;'>Produto cadastrado com sucesso!</p>"; //mensagem de sucesso
+        // echo "<p style='color:green;'>Produto cadastrado com sucesso!</p>"; //mensagem de sucesso
 
-        // header('Location: painel_admin.php'); //redireciona para a página painel_admin.php
+        header('Location: ../pages/CadastrarProdutos.php?sucesso'); //redireciona para a página painel_admin.php
 
     } catch (PDOException $e) {
-        echo "<p style='color:red;'> TRY Erro ao cadastrar o produto:" . $e . "</p>"; //mensagem de erro
+        echo "<p style='color:red;'>Erro ao cadastrar o produto:" . $e . "</p>"; //mensagem de erro
     }
 }
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -64,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
 
 <body>
     <h2>Cadastro de Produto</h2>
-    <form action="cadastrar_produto.php" method="post" enctype="multipart/form-data">
+    <form action="./cadastrar_produto.php" method="post" enctype="multipart/form-data">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
         <p></p>
@@ -77,10 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
         <label for="imagem">Imagem:</label>
         <input type="file" id="imagem" name="imagem" required>
         <p></p>
-        <label for="url_img">url da imgaem:</label>
+        <label for="url_img">url da imagem:</label>
         <input type="text" id="url_img" name="url_img">
         <p></p>
         <input type="submit" value="Cadastrar">
+    </form>
 </body>
 
-</html>
+</html> -->

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -11,11 +11,11 @@
     <h2>Login do Administrador</h2>
 
     <form action="processa_login.php" method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+        <label for="adm_email">E-mail:</label>
+        <input type="email" id="adm_email" name="adm_email" required>
         <p></p>
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" required>
+        <label for="adm_senha">Senha</label>
+        <input type="password" id="adm_senha" name="adm_senha" required>
         <p></p>
 
         <input type="submit" value="Entrar">
