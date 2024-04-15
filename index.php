@@ -14,8 +14,8 @@
         <nav>
             <ul>
                 <li><a href="./index.php">Home</a></li>
-                <li><a href="./pages/painel_admin.php">Administradores</a></li>
-                <li><a href="./pages/painel_produtos.php">Produtos</a></li>
+                <li><a href="./pages/admin/painel_admin.php">Administradores</a></li>
+                <li><a href="./pages/produto/painel_produtos.php">Produtos</a></li>
             </ul>
         </nav>
     </header>
@@ -29,40 +29,39 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nome</th>
                             <th>Preço</th>
                             <th>Descrição</th>
-                            <th>Imagem do produto</th>
                             <th>Editar</th>
                             <th>Excluir</th>
+                            <th>Ativo</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <?php
+                        <?php
                         // Inclui o arquivo de listagem de produtos
-                        $produtos = include('php/listar_produtos.php');
+                        $produtos = include('php/produto/listar_produtos.php');
 
                         // Itera sobre os produtos para exibi-los na tabela
                         foreach ($produtos as $produto) : ?>
                             <tr>
                                 <td>
-                                    <?php echo $produto['ID_PRODUTO']; ?>
+                                    <?php echo $produto['PRODUTO_NOME']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $produto['NOME_PRODUTO']; ?>
+                                    <?php echo $produto['PRODUTO_PRECO']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $produto['PRECO_PRODUTO']; ?>
+                                    <?php echo $produto['PRODUTO_DESC']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $produto['DESCRICAO_PRODUTO']; ?>
+                                    <?php echo $produto['PRODUTO_ATIVO'] == 1 ? '<p style="color:green;">Ativo</p>' : '<p style="color:red;">Inativo</p>'; ?> 
                                 </td>
-                                <td><img src='<?php $produto['IMAGEM_PRODUTO'] ?>' width='100' alt='img produto' /></td>
-                                <td><a href='<?php "./excluir_produto.php?id=" . $produto['ID_PRODUTO'] ?>'>Excluir</a></td>
+
+                                <td><a href='<?php "./php/excluir_produto.php?id=" . $produto['ID_PRODUTO'] ?>'>Excluir</a></td>
                                 <td><a href='<?php "./pages/editar_produto.php?id=" . $produto['ID_PRODUTO'] ?>'>Editar</a></td>
                             </tr>
-                        <?php endforeach; ?> -->
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
 
