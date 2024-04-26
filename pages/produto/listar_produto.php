@@ -10,17 +10,48 @@ require_once('../../php/config/conexao.php'); //inclui o arquivo de conexão
 
 try {
     $stmt = $pdo->prepare("SELECT * FROM PRODUTO 
-    INNER JOIN PRODUTO_IMAGEM ON PRODUTO.PRODUTO_ID = PRODUTO_IMAGEM.PRODUTO_ID 
     LEFT JOIN CATEGORIA ON PRODUTO.CATEGORIA_ID = CATEGORIA.CATEGORIA_ID 
     LEFT JOIN PRODUTO_ESTOQUE ON PRODUTO_ESTOQUE.PRODUTO_ID = PRODUTO.PRODUTO_ID;
     ");
     $stmt->execute();
     if ($stmt->rowCount() > 0) { //se retornar algum registro
         $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC); //retorna um array associativo com os registros
-        // echo var_dump($produtos);
+
+        $imagens_produto = [];
+
+        if (isset($produtos)) {
+            foreach ($produtos as $produto) {
+                $img_smtp = $pdo->prepare("SELECT * FROM PRODUTO_IMAGEM WHERE PRODUTO_ID = :produto_id");
+                $img_smtp->bindParam(':produto_id', $produto['PRODUTO_ID']);
+                $img_smtp->execute();
+                if ($img_smtp->rowCount() > 0) { //se retornar algum registro
+                    $imagens_produto[$produto['PRODUTO_ID']] = $img_smtp->fetchAll(PDO::FETCH_ASSOC);
+                } else {
+                    $imagens_produto[$produto['PRODUTO_ID']] = [];
+                }
+            }
+        } else {
+            $imagens_produto = [];
+        }
     } else {
         $produtos = [];
     }
+    // try {
+    //     foreach ($produtos as $produto) {
+    //         $stmt = $pdo->prepare("SELECT * FROM PRODUTO_IMAGEM WHERE PRODUTO_ID = $produto[PRODUTO_ID]");
+    //         $stmt->execute();
+    //         if ($stmt->rowCount() > 0) { //se retornar algum registro
+    //             $imagens_produto = $stmt->fetch(PDO::FETCH_ASSOC);
+    //             echo "<pre> produto imagem: ";
+    //             print_r($imagens_produto);
+    //             echo "</pre>";
+    //         } else {
+    //             $imagens_produto = [];
+    //         }
+    //     }
+    // } catch (PDOException $e) {
+    //     echo "<p style='color:red;'>Erro ao listar as imagens dos produtos: " . $e . "</p>";
+    // }
 } catch (PDOException $e) {
     echo "<p style='color:red;'>Erro ao listar os produtos: " . $e . "</p>"; //mensagem de erro
 }
@@ -99,14 +130,21 @@ try {
                                     ?>
                                 </td>
                                 <td>
-                                    <img src="<?php echo $produto['IMAGEM_URL']; ?>" alt="<?php echo $produto['PRODUTO_NOME']; ?>" style="width: 100px;">
+                                    <?php if (isset($imagens_produto[$produto['PRODUTO_ID']]) && !empty($imagens_produto[$produto['PRODUTO_ID']])) : ?>
+                                        <?php foreach ($imagens_produto[$produto['PRODUTO_ID']] as $imagem) : ?>
+                                            <img src="<?php echo $imagem['IMAGEM_URL']; ?>" alt="<?php echo $produto['PRODUTO_NOME'];?>" style="width: 100px;"> <!-- Substitua 'caminho_da_imagem' pelo nome correto da coluna no seu banco de dados -->
+                                        <?php endforeach; ?>
+                                    <?php else : ?>
+                                        <p>Nenhuma imagem disponível.</p>
+                                    <?php endif; ?>
+                                    <!-- <img src="<?php echo $produto['IMAGEM_URL']; ?>" alt="<?php echo $produto['PRODUTO_NOME']; ?>" style="width: 100px;"> -->
                                 </td>
                                 <td>
                                     <?php echo $produto['PRODUTO_QTD']; ?>
                                 </td>
 
                                 <td><a href='<?php echo "./excluir_produto.php?produto_id=" . $produto['PRODUTO_ID'] ?>'>Excluir</a></td>
-                                <td><a href='<?php echo "./editar_produto.php?produto_id=" . $produto['PRODUTO_ID']?>'>Editar</a></td>
+                                <td><a href='<?php echo "./editar_produto.php?produto_id=" . $produto['PRODUTO_ID'] ?>'>Editar</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
