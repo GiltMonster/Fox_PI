@@ -1,9 +1,9 @@
 <?php
 
-$host = 'localhost'; //endereço do servidor
-$db = 'FOX'; //nome do banco de dados
-$user = 'root'; //usuário do banco de dados
-$pass = ''; //senha do banco de dados
+$host = '144.22.157.228'; //endereço do servidor
+$db = 'Fox'; //nome do banco de dados
+$user = 'fox'; //usuário do banco de dados
+$pass = 'fox'; //senha do banco de dados
 $charset = 'utf8mb4'; //codificação de caracteres
 
 $dsn = "mysql:host=$host; dbname=$db;charset=$charset"; //monta a string de conexão com o banco de dados

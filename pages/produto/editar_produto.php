@@ -12,13 +12,14 @@ try {
     echo 'Erro ao executar a ao pegar a categoria: ' . $e->getMessage();
 }
 
-if($_SERVER['REQUEST_METHOD'] == 'GET'){
-    $produto_id = $_GET['produto_id'];
-    if(empty($produto_id)){
+$produto_id = $_GET['produto_id'];
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (empty($produto_id)) {
         echo "<p style='color:red;'>Produto não informado!</p>";
         exit();
-    }else{
-        try{
+    } else {
+        try {
             $stmt = $pdo->prepare("SELECT * FROM PRODUTO
             INNER JOIN PRODUTO_IMAGEM ON PRODUTO.PRODUTO_ID = PRODUTO_IMAGEM.PRODUTO_ID
             LEFT JOIN CATEGORIA ON PRODUTO.CATEGORIA_ID = CATEGORIA.CATEGORIA_ID
@@ -28,9 +29,24 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $stmt->execute();
             if ($stmt->rowCount() > 0) { //se retornar algum registro
                 $produto = $stmt->fetch(PDO::FETCH_ASSOC); //retorna um array associativo com os registros
-                
+
+                if (isset($produto)) {
+                    $img_smtp = $pdo->prepare("SELECT * FROM PRODUTO_IMAGEM WHERE PRODUTO_ID = :produto_id");
+                    $img_smtp->bindParam(':produto_id', $produto_id, PDO::PARAM_INT);
+                    $img_smtp->execute();
+                    if ($img_smtp->rowCount() > 0) { //se retornar algum registro
+                        $imagens_produto = $img_smtp->fetchAll(PDO::FETCH_ASSOC);
+                    } else {
+                        $imagens_produto = [];
+                    }
+                } 
+
                 echo "<pre> produtos";
                 print_r($produto);
+                echo "</pre>";
+
+                echo "<pre> produtos IMG";
+                print_r($imagens_produto);
                 echo "</pre>";
             } else {
                 echo "<p style='color:red;'>Produto não encontrado!</p>";
@@ -41,10 +57,73 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         }
     }
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome = $_POST['nome'];
+    $descricao = $_POST['descricao'];
+    $preco = $_POST['preco'];
+    $desconto = $_POST['desconto'];
+    $produto_qtd = $_POST['produto_qtd'];
+    $ativo = isset($_POST['ativo']) ? 1 : 0;
+    $categoria_id = $_POST['categoria_id'];
+    $imagem_urls = $_POST['imagem_url'];
+    $imagem_ordens = $_POST['imagem_ordem'];
+ 
+    echo "<pre> POST";
+    print_r($_POST);
+    echo "</pre>";
+
+    try {
+        $sql = "UPDATE PRODUTO SET PRODUTO_NOME = :nome, PRODUTO_DESC = :descricao, PRODUTO_PRECO = :preco, PRODUTO_DESCONTO = :desconto, CATEGORIA_ID = :categoria_id, PRODUTO_ATIVO = :ativo 
+        WHERE PRODUTO_ID = :produto_id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':produto_id', $produto_id, PDO::PARAM_INT);
+        $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+        $stmt->bindParam(':preco', $preco, PDO::PARAM_STR);
+        $stmt->bindParam(':desconto', $desconto, PDO::PARAM_STR);
+        $stmt->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
+        $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
+        $stmt->execute();
+
+        try {
+            $sql = "UPDATE PRODUTO_ESTOQUE SET PRODUTO_QTD = :produto_qtd WHERE PRODUTO_ID = :produto_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':produto_id', $produto_id, PDO::PARAM_INT);
+            $stmt->bindParam(':produto_qtd', $produto_qtd, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo 'Erro ao atualizar estoque: ' . $e->getMessage();
+        }
+
+        try {
+            //Inserindo imagens no BD
+            foreach ($imagem_urls as $index => $url) {
+                $ordem = $imagem_ordens[$index];
+                $sql_imagem = "UPDATE PRODUTO_IMAGEM SET IMAGEM_URL = :url_imagem, IMAGEM_ORDEM = :ordem_imagem WHERE PRODUTO_ID = :produto_id";
+                $stmt_imagem = $pdo->prepare($sql_imagem);
+                $stmt_imagem->bindParam(':url_imagem', $url, PDO::PARAM_STR);
+                $stmt_imagem->bindParam(':ordem_imagem', $ordem, PDO::PARAM_INT);
+                $stmt_imagem->bindParam(':produto_id', $produto_id, PDO::PARAM_INT);
+                $stmt_imagem->execute();
+            }
+
+            header('Location: ./listar_produto.php');
+        } catch (PDOException $th) {
+            echo 'Erro ao executar a atualizar imagem: ' . $th->getMessage();
+        }
+    } catch (PDOException $e) {
+        echo 'Erro ao executar a atualizar produto: ' . $e->getMessage();
+    }
+
+
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,6 +131,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     <link rel="stylesheet" href="../../style/produto/cadastrar_produtos.css">
     <title>Excluir ou Editar os Produtos</title>
 </head>
+
 <body>
 
     <header class="navbar">
@@ -97,23 +177,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 }
             </script>
 
-<!-- (
-    [CATEGORIA_ID] => 2
-    [PRODUTO_ATIVO] => 1
-    [PRODUTO_DESC] => boneca de platico
-    [PRODUTO_DESCONTO] => 40.00
-    [PRODUTO_ID] => 23
-    [PRODUTO_NOME] => boneca
-    [PRODUTO_PRECO] => 90.00
-    [IMAGEM_ID] => 2
-    [IMAGEM_ORDEM] => 1
-    [IMAGEM_URL] => https://static.wikia.nocookie.net/herois/images/5/58/Ken_TS3.png/revision/latest?cb=20221227032159&path-prefix=pt-br
-    [CATEGORIA_NOME] => Boneco
-    [CATEGORIA_DESC] => de plastico
-    [CATEGORIA_ATIVO] => 1
-    [PRODUTO_QTD] => 10
-) -->
-
             <div class="form-container">
                 <form method="post" enctype="multipart/form-data">
                     <label for="nome">Nome do produto:</label>
@@ -132,7 +195,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                     <input type="number" id="produto_qtd" name="produto_qtd" step="1" value="<?php echo $produto['PRODUTO_QTD']; ?>">
 
                     <label for="ativo">Produto ativo:</label>
-                    <input type="checkbox" id="ativo" name="ativo" value="1" <?php echo $produto['PRODUTO_ATIVO'] ? 'checked' : '' ;?>>
+                    <input type="checkbox" id="ativo" name="ativo" value="1" <?php echo $produto['PRODUTO_ATIVO'] ? 'checked' : ''; ?>>
 
                     <label for="categoria_id">Categoria do produto:</label>
                     <select name="categoria_id" id="categoria_id" value="<?php echo $produto['CATEGORIA_ID']; ?>">
@@ -146,12 +209,17 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
                     <a href="../../pages/categoria/cadastrar_categoria.php">+</a>
 
-                    <div id="containerImagens">
-                        <input type="text" name="imagem_url[]" placeholder="URL da imagem" value="<?php echo $produto['IMAGEM_URL']; ?>">
-                        <input type="number" name="imagem_ordem[]" placeholder="Ordem" min="1" value="<?php echo $produto['IMAGEM_ORDEM']; ?>">
-                    </div>
+                    <?php 
+                    foreach ($imagens_produto as $imagem) {
+                        echo '<div id="containerImagens">';
+                        echo '<input type="text" name="imagem_url[]" placeholder="URL da imagem" value="'.$imagem['IMAGEM_URL'].'">';
+                        echo '<input type="number" name="imagem_ordem[]" placeholder="Ordem" min="1" value="'.$imagem['IMAGEM_ORDEM'].'">';
+                        echo '</div>';
+                    }
+                    ?>
+
                     <button onclick="adicionarImagem()" class="add_img">Adicionar imagem</button>
-                    <input type="submit" value="Cadastrar">
+                    <input type="submit" value="Atualizar">
             </div>
 
             <?php
@@ -163,6 +231,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             </div>
         </section>
     </main>
-    
+
 </body>
+
 </html>

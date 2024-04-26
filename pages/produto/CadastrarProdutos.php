@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':preco', $preco, PDO::PARAM_STR);
         $stmt->bindParam(':desconto', $desconto, PDO::PARAM_STR);
         $stmt->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
-        $stmt->bindParam(':ativo', $ativo, PDO::PARAM_STR);
+        $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
         $stmt->execute();
 
         $produto_id = $pdo->lastInsertId();

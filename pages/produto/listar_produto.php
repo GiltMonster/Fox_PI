@@ -35,23 +35,7 @@ try {
         }
     } else {
         $produtos = [];
-    }
-    // try {
-    //     foreach ($produtos as $produto) {
-    //         $stmt = $pdo->prepare("SELECT * FROM PRODUTO_IMAGEM WHERE PRODUTO_ID = $produto[PRODUTO_ID]");
-    //         $stmt->execute();
-    //         if ($stmt->rowCount() > 0) { //se retornar algum registro
-    //             $imagens_produto = $stmt->fetch(PDO::FETCH_ASSOC);
-    //             echo "<pre> produto imagem: ";
-    //             print_r($imagens_produto);
-    //             echo "</pre>";
-    //         } else {
-    //             $imagens_produto = [];
-    //         }
-    //     }
-    // } catch (PDOException $e) {
-    //     echo "<p style='color:red;'>Erro ao listar as imagens dos produtos: " . $e . "</p>";
-    // }
+    }                                    
 } catch (PDOException $e) {
     echo "<p style='color:red;'>Erro ao listar os produtos: " . $e . "</p>"; //mensagem de erro
 }
@@ -125,8 +109,12 @@ try {
                                 </td>
                                 <td>
                                     <?php
-                                    echo $produto['PRODUTO_DESCONTO'];
-                                    $produto['PRODUTO_DESCONTO'] != 0 ? "R$ " . number_format($valor, 2, ',', '.') . " R$" . number_format($produto['PRODUTO_PRECO'], 2, ',', '.') . "-" .  number_format($produto['PRODUTO_DESCONTO'], 2, ',', '.') :  "R$ " . number_format($produto['PRODUTO_PRECO'], 2, ',', '.')
+                                    
+                                    if (isset($produto['PRODUTO_DESCONTO']) && $produto['PRODUTO_DESCONTO'] < 100) {
+                                        echo '<p style="text-decoration: line-through;">R$ ' . number_format($produto['PRODUTO_PRECO'] - ($produto['PRODUTO_PRECO'] / 100 * $produto['PRODUTO_DESCONTO']), 2, ',', '.') . " </p>(Desconto de " . number_format($produto['PRODUTO_PRECO'] / 100 * $produto['PRODUTO_DESCONTO']) . "%)";
+                                    }else{
+                                        echo "R$ " . number_format($produto['PRODUTO_PRECO'], 2, ',', '.');
+                                    };
                                     ?>
                                 </td>
                                 <td>
