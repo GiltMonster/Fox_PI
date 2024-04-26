@@ -161,6 +161,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endforeach; ?>
                     </select>
 
+                    <a href="../../pages/categoria/cadastrar_categoria.php">+</a>
+
                     <div id="containerImagens">
                         <input type="text" name="imagem_url[]" placeholder="URL da imagem" required>
                         <input type="number" name="imagem_ordem[]" placeholder="Ordem" min="1" required>

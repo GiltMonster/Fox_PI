@@ -9,9 +9,10 @@ require_once('../../php/config/conexao.php'); //inclui o arquivo de conexão
 // }
 
 try {
-    $stmt = $pdo->prepare("SELECT PRODUTO.*, PRODUTO_IMAGEM.*, CATEGORIA.CATEGORIA_NOME FROM PRODUTO INNER 
-    JOIN PRODUTO_IMAGEM ON PRODUTO.PRODUTO_ID = PRODUTO_IMAGEM.PRODUTO_ID 
-    LEFT JOIN CATEGORIA ON PRODUTO.CATEGORIA_ID = CATEGORIA.CATEGORIA_ID;
+    $stmt = $pdo->prepare("SELECT * FROM PRODUTO 
+    INNER JOIN PRODUTO_IMAGEM ON PRODUTO.PRODUTO_ID = PRODUTO_IMAGEM.PRODUTO_ID 
+    LEFT JOIN CATEGORIA ON PRODUTO.CATEGORIA_ID = CATEGORIA.CATEGORIA_ID 
+    LEFT JOIN PRODUTO_ESTOQUE ON PRODUTO_ESTOQUE.PRODUTO_ID = PRODUTO.PRODUTO_ID;
     ");
     $stmt->execute();
     if ($stmt->rowCount() > 0) { //se retornar algum registro
@@ -42,7 +43,7 @@ try {
         <nav>
             <ul>
                 <li><a href="../../index.php">Home</a></li>
-                <li><a href="./painel_admin.php">Administradores</a></li>
+                <li><a href="../admin/painel_admin.php">Administradores</a></li>
                 <li><a href="./painel_produtos.php">Produtos</a></li>
             </ul>
         </nav>
@@ -64,6 +65,7 @@ try {
                             <th>Ativo</th>
                             <th>Desconto</th>
                             <th>Imagem</th>
+                            <th>Estoque</th>
                             <th>Ações</th>
 
                         </tr>
@@ -72,7 +74,8 @@ try {
                         <?php
 
                         // Itera sobre os produtos para exibi-los na tabela
-                        foreach ($produtos as $produto) : ?>
+                        foreach ($produtos as $produto) :
+                        ?>
                             <tr>
                                 <td>
                                     <?php echo $produto['PRODUTO_NOME']; ?>
@@ -98,9 +101,12 @@ try {
                                 <td>
                                     <img src="<?php echo $produto['IMAGEM_URL']; ?>" alt="<?php echo $produto['PRODUTO_NOME']; ?>" style="width: 100px;">
                                 </td>
+                                <td>
+                                    <?php echo $produto['PRODUTO_QTD']; ?>
+                                </td>
 
-                                <td><a href='<?php "../../php/produto/excluir_produto.php?id=" . $produto['ID_PRODUTO'] ?>'>Excluir</a></td>
-                                <td><a href='<?php "./pages/editar_produto.php?id=" . $produto['ID_PRODUTO'] ?>'>Editar</a></td>
+                                <td><a href='<?php echo "./excluir_produto.php?produto_id=" . $produto['PRODUTO_ID'] ?>'>Excluir</a></td>
+                                <td><a href='<?php echo "./editar_produto.php?produto_id=" . $produto['PRODUTO_ID']?>'>Editar</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
