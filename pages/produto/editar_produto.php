@@ -4,6 +4,8 @@ session_start(); //inicia a sessão
 
 require_once('../../php/config/conexao.php'); //inclui o arquivo de conexão
 
+$imagens_produto = [];
+
 try {
     $categorias = $pdo->prepare('SELECT * FROM CATEGORIA');
     $categorias->execute(); //executa a query
@@ -39,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     } else {
                         $imagens_produto = [];
                     }
-                } 
+                }
 
                 echo "<pre> produtos";
                 print_r($produto);
@@ -68,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $categoria_id = $_POST['categoria_id'];
     $imagem_urls = $_POST['imagem_url'];
     $imagem_ordens = $_POST['imagem_ordem'];
- 
+
     echo "<pre> POST";
     print_r($_POST);
     echo "</pre>";
@@ -98,13 +100,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         try {
             //Inserindo imagens no BD
+            echo "<pre> imagens";
+            print_r($imagens_produto);
+            echo "</pre>";
+
+            try {
+                $img_smtp = $pdo->prepare("SELECT * FROM PRODUTO_IMAGEM WHERE PRODUTO_ID = :produto_id");
+                $img_smtp->bindParam(':produto_id', $produto_id, PDO::PARAM_INT);
+                $img_smtp->execute();
+                if ($img_smtp->rowCount() > 0) { //se retornar algum registro
+                    $imagens_produto = $img_smtp->fetchAll(PDO::FETCH_ASSOC);
+                } else {
+                    $imagens_produto = [];
+                }
+            } catch (PDOException $e) {
+                echo 'Erro ao pegar a imagem: ' . $e->getMessage();
+            }
+
             foreach ($imagem_urls as $index => $url) {
+
+                echo "<pre> imagem id";
+                print_r($imagens_produto[$index]['IMAGEM_ID']);
+                echo "</pre>";
+
                 $ordem = $imagem_ordens[$index];
-                $sql_imagem = "UPDATE PRODUTO_IMAGEM SET IMAGEM_URL = :url_imagem, IMAGEM_ORDEM = :ordem_imagem WHERE PRODUTO_ID = :produto_id";
+                $sql_imagem = "UPDATE PRODUTO_IMAGEM SET IMAGEM_URL = :url_imagem, IMAGEM_ORDEM = :ordem_imagem WHERE IMAGEM_ID = :produto_id";
                 $stmt_imagem = $pdo->prepare($sql_imagem);
                 $stmt_imagem->bindParam(':url_imagem', $url, PDO::PARAM_STR);
                 $stmt_imagem->bindParam(':ordem_imagem', $ordem, PDO::PARAM_INT);
-                $stmt_imagem->bindParam(':produto_id', $produto_id, PDO::PARAM_INT);
+                $stmt_imagem->bindParam(':produto_id', $imagens_produto[$index]['IMAGEM_ID'], PDO::PARAM_INT);
                 $stmt_imagem->execute();
             }
 
@@ -115,8 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } catch (PDOException $e) {
         echo 'Erro ao executar a atualizar produto: ' . $e->getMessage();
     }
-
-
 }
 
 ?>
@@ -209,11 +231,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <a href="../../pages/categoria/cadastrar_categoria.php">+</a>
 
-                    <?php 
+                    <?php
                     foreach ($imagens_produto as $imagem) {
                         echo '<div id="containerImagens">';
-                        echo '<input type="text" name="imagem_url[]" placeholder="URL da imagem" value="'.$imagem['IMAGEM_URL'].'">';
-                        echo '<input type="number" name="imagem_ordem[]" placeholder="Ordem" min="1" value="'.$imagem['IMAGEM_ORDEM'].'">';
+                        echo '<input type="text" name="imagem_url[]" placeholder="URL da imagem" value="' . $imagem['IMAGEM_URL'] . '">';
+                        echo '<input type="number" name="imagem_ordem[]" placeholder="Ordem" min="1" value="' . $imagem['IMAGEM_ORDEM'] . '">';
                         echo '</div>';
                     }
                     ?>

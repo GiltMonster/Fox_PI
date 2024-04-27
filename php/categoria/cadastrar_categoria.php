@@ -20,7 +20,7 @@
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
             $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
-            $stmt->bindParam(':categoria_ativo', $categoria_ativo, PDO::PARAM_STR);
+            $stmt->bindParam(':categoria_ativo', $categoria_ativo, PDO::PARAM_INT);
             $stmt->execute();
             header('Location: ./sucesso.php?status=sucesso');
             
