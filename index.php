@@ -40,7 +40,8 @@
                     <tbody>
                         <?php
                         // Inclui o arquivo de listagem de produtos
-                        $produtos = include('php/produto/listar_produtos.php');
+                        require_once './php/config/conexao.php';
+                        include './php/produto/listar_produto.php';
 
                         // Itera sobre os produtos para exibi-los na tabela
                         foreach ($produtos as $produto) : ?>
