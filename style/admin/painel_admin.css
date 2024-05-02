@@ -1,39 +1,111 @@
-.container-buttons{
-    display: flex;
-    justify-content: center;
-    margin: 20px;
+.pesquisa-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+.pesquisa-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.btn-admin{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #3cc5ff;
-    color: #000000;
-    border: 1px solid #1786b6;
-    padding: 30px 140px;
-    text-decoration: none;
-    margin: 15px;
-    cursor: pointer;
-    transition: 0.5s;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.pesquisa-form input[type="text"] {
+  width: 350px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
 }
 
-.btn-admin label{
-    font-size: 0.9em;
-    cursor: pointer;
-    padding: 0 0 0 10px;
+.pesquisa-form input[type="text"]:focus {
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  outline: 2px solid #f9a80c;
+  outline-color: #f9a80c;
+}
+
+.pesquisa-form button {
+  font-size: 1em;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9a80c;
+  color: #000000;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.pesquisa-form button:hover {
+  background-color: #ffc107;
+  color: #000000;
+}
+
+table {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  border-spacing: 0;
+}
+
+th,td {
+  border: none;
+  text-align: left;
+  padding: 8px;
+  border-bottom: 2px solid #ddd;
+
+}
+
+tr:hover {
+  background-color: #ffc10764;
+}
+
+.btn-limpa-pesquisa {
+  background-color: #e03535;
+  color: #ffffff;
+  border: 1px solid #ff6a6a;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.btn-limpa-pesquisa:hover {
+  background-color: #ff4f4f;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 12px;
+}
+
+.btn-admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3cc5ff;
+  color: #fff;
+  border: 1px solid #1786b6;
+  padding: 10px 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-admin label {
+  font-size: 0.9em;
+  cursor: pointer;
+  padding: 0 0 0 10px;
 }
 
 .btn-admin:hover {
-    background-color: #43ADDA;
-    color: #fff;
-    padding: 30px 150px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-}
-
-svg{
-    width: 50px;
-    height: 50px;
+  background-color: #43adda;
+  padding: 12px 17px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
