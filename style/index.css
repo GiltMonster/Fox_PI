@@ -9,9 +9,17 @@ body{
     border-bottom: 1px solid #e5e5e5;
     padding: 0.5rem 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: row;
+}
+
+.navbar img{
+    margin-bottom: -2.5%;
+    margin-left: 270px;
+    width: 100px;
+    height: auto;
+
 }
 
 .navbar ul{
@@ -19,17 +27,32 @@ body{
     list-style: none;
 }
 
-.navbar a, h1{
+.navbar a{
     color: white;
     text-decoration: none;
     margin: 0 1rem;
     font-size: 1.2rem;
-    
 }
 
 .navbar a:hover{
     color: #000000;
     text-decoration: underline;
+}
+
+.btn-sair{
+    margin-left: 37%;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.btn-sair:hover{
+    background-color: #ffc107;
+    color: #000000;
 }
 
 .container{

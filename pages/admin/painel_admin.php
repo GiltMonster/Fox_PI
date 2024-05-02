@@ -11,7 +11,7 @@
 
 <body>
     <header class="navbar">
-        <h1>Fox brinquedos</h1>
+        <img src="../../images/fox.svg" alt="fox logo"/>
         <nav>
             <ul>
                 <li><a href="../../index.php">Home</a></li>
@@ -19,6 +19,8 @@
                 <li><a href="../produto/painel_produtos.php">Produtos</a></li>
             </ul>
         </nav>
+
+        <button class="btn-sair">Sair</button>
     </header>
     <main>
         <section class="container">
@@ -73,8 +75,12 @@
                         echo "<td>" . $adm['ADM_SENHA'] . "</td>";
                         echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<p style="color:red;">Inativo</p>') . "</td>";
                         echo "<td>
-                        <a href='../../php/admin/editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>Editar</a>
-                        <a href='../../php/admin/excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>Excluir</a>
+                        <a href='../../php/admin/editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
+                            <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
+                        </a>
+                        <a href='../../php/admin/excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>
+                            <img class='excluir' src='../../images/icons/excluir.svg' alt='excluir'/>
+                        </a>
                         </td>";
                         echo "</tr>";
                     }
