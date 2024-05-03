@@ -5,37 +5,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Administrador</title>
-    <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="../../style/index.css">
+    <link rel="stylesheet" href="../../style/admin/cadastro_admin.css">
 </head>
 
 <body>
     <header class="navbar">
-        <h1>Fox brinquedos</h1>
+        <img src="../../images/fox.svg" alt="fox logo" />
         <nav>
             <ul>
-                <li><a href="../index.php">Home</a></li>
+                <li><a href="../../index.php">Home</a></li>
                 <li><a href="./painel_admin.php">Administradores</a></li>
-                <li><a href="./painel_produtos.php">Produtos</a></li>
+                <li><a href="../produto/painel_produtos.php">Produtos</a></li>
             </ul>
         </nav>
+        <button class="btn-sair">Sair</button>
     </header>
+    <main>
+        <section class="container">
+            <div class="cadastro-header">
+                <h2>Cadastrar novo administrador</h2>
+            </div>
+            <div class="container-form">
+                <form action="../../php/admin/cadastra_admin.php" method="post" enctype="multipart/form-data">
+                    <div class="campos">
+                        <label for="adm_nome">Nome</label>
+                        <input type="text" id="adm_nome" name="adm_nome" required>
+                    </div>
 
-    <h2>Cadastro de Administrador</h2>
-    <form action="../../php/admin/cadastra_admin.php" method="post" enctype="multipart/form-data">
-        <label for="adm_nome">Nome do administrador: </label>
-        <input type="text" id="adm_nome" name="adm_nome" required>
-        <p></p>
-        <label for="adm_email">E-mail Administrador: </label>
-        <input type="text" id="adm_email" name="adm_email" required>
-        <p></p>
-        <label for="adm_senha">Senha administrador: </label>
-        <input type="password" minlenght="8" id="adm_senha" name="adm_senha" required>
-        <p></p>
-        <label for="adm_ativo">Ativo:</label>
-        <input type="checkbox" name="adm_ativo" id="adm_ativo" value="1" checked>
-        <p></p>
-        <input type="submit" value="Cadastrar">
-    </form>
+                    <div class="campos">
+                        <label for="adm_email">E-mail</label>
+                        <input type="text" id="adm_email" name="adm_email" required>
+                    </div>
+                    <div class="campos">
+                        <label for="adm_senha">Senha</label>
+                        <input type="password" minlenght="8" id="adm_senha" name="adm_senha" required>
+                    </div>
+
+                    <div class="campos">
+                        <label for="adm_ativo">Ativo</label>
+                        <input type="checkbox" name="adm_ativo" id="adm_ativo" value="1">
+                        <label for="adm_ativo" id="txt_adm_ativo">Ativo</label>
+
+                    </div>
+                    <div class="btn-group">
+                        <input class="btn-salvar" type="submit" value="Salvar" />
+                        <a class="btn-cancelar" href="#">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+
+        </section>
+    </main>
 
 </body>
 
