@@ -9,6 +9,7 @@
 .container-form {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 form {
@@ -54,7 +55,7 @@ form {
   align-items: center;
   background-color: #3cc5ff;
   color: #fff;
-  border: 1px solid #1786b6;
+  border: 1px solid #3cc5ff;
   padding: 10px;
   text-decoration: none;
   cursor: pointer;

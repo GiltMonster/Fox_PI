@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // se o formulário foi submetido
 
         $query->execute(); // executa a consulta SQL
 
-        echo "<p style='color:green;'>Produto cadastrado com sucesso!</p>"; // mensagem de sucesso
+        //echo "<p style='color:green;'>Produto cadastrado com sucesso!</p>"; // mensagem de sucesso
 
     } catch (PDOException $e) {
         echo "<p style='color:red;'>Erro ao cadastrar o administrador: " . $e->getMessage() . "</p>"; // mensagem de erro
