@@ -23,7 +23,7 @@
     </header>
     <main>
         <section class="container">
-            <div class="cadastro-header">
+            <div class="sub-header">
                 <h2>Cadastrar novo administrador</h2>
             </div>
             <div class="container-form">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="btn-group">
                         <input class="btn-salvar" type="submit" value="Salvar" />
-                        <a class="btn-cancelar" href="./">Cancelar</a>
+                        <a class="btn-cancelar" href="./painel_admin.php">Cancelar</a>
                     </div>
                 </form>
             </div>

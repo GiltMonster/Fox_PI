@@ -3,11 +3,6 @@
 
     // require_once('../config/conexao.php'); //inclui o arquivo de conexão
 
-    // if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
-    //     header('Location:login.php'); //redireciona para a página login.php
-    //     exit(); //finaliza a execução do script
-    // }
-
     try{
         $stmt = $pdo->prepare("SELECT * FROM ADMINISTRADOR");
         $stmt->execute();

@@ -32,7 +32,7 @@
     <main>
         <section class="container">
 
-            <div class="cadastro-header">
+            <div class="sub-header">
                 <h2>Editar administrador</h2>
             </div>
 
@@ -58,7 +58,7 @@
                     </div>
                     <div class="btn-group">
                         <input class="btn-salvar" type="submit" value="Salvar">
-                        <a class="btn-cancelar" href="listar_administrador.php">Cancelar</a>
+                        <a class="btn-cancelar" href="./painel_admin.php">Cancelar</a>
 
                     </div>
                 </form>

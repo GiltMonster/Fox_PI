@@ -10,7 +10,7 @@
 <body>
     <h2>Login do Administrador</h2>
 
-    <form action="processa_login.php" method="post">
+    <form action="../../php/login/processa_login.php" method="post">
         <label for="adm_email">E-mail:</label>
         <input type="email" id="adm_email" name="adm_email" required>
         <p></p>

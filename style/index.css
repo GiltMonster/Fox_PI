@@ -1,62 +1,102 @@
-body{
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 
-.navbar{
-    background-color: #3cc5ff;
-    border-bottom: 1px solid #e5e5e5;
-    padding: 0.5rem 1rem;
+.navbar {
+  background-color: #3cc5ff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.navbar img {
+  margin-bottom: -2.5%;
+  margin-left: 270px;
+  width: 100px;
+  height: auto;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-size: 1.2rem;
+}
+
+.navbar a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.btn-sair {
+  margin-left: 37%;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btn-sair:hover {
+  background-color: #ffc107;
+  color: #000000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.sub-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 50px 0 20px 0;
+}
+
+.btn-produto{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    flex-direction: row;
-}
-
-.navbar img{
-    margin-bottom: -2.5%;
-    margin-left: 270px;
-    width: 100px;
-    height: auto;
-
-}
-
-.navbar ul{
-    display: flex;
-    list-style: none;
-}
-
-.navbar a{
-    color: white;
+    background-color: #3cc5ff;
+    color: #000000;
+    border: 1px solid #1786b6;
+    padding: 30px 140px;
     text-decoration: none;
-    margin: 0 1rem;
-    font-size: 1.2rem;
-}
-
-.navbar a:hover{
-    color: #000000;
-    text-decoration: underline;
-}
-
-.btn-sair{
-    margin-left: 37%;
-    background-color: #ffffff;
-    color: #000000;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
+    margin: 15px;
     cursor: pointer;
     transition: 0.5s;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.btn-sair:hover{
-    background-color: #ffc107;
-    color: #000000;
+.btn-produto label{
+    font-size: 0.9em;
+    cursor: pointer;
+    padding: 0 0 0 10px;
 }
 
-.container{
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+.btn-produto:hover {
+    background-color: #43ADDA;
+    color: #fff;
+    padding: 30px 150px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+svg{
+    width: 50px;
+    height: 50px;
 }
