@@ -26,9 +26,6 @@
                 </svg>
                 <input class="inputField" placeholder="Password" type="password" id="adm_senha" name="adm_senha" required>
             </div>
-            <button id="button" type="submit">
-                Entrar
-            </button>
             <?php
             if (isset($_GET['erro'])) { //se existir o parâmetro erro na URL
                 echo '<p style="color:red;">Nome de usuário ou senha incorretos!</p>';
@@ -38,6 +35,9 @@
                 echo '<p style="color:red;">Administrador inativo, entre em contato com RH!</p>';
             }
             ?>
+            <button id="button" type="submit">
+                Entrar
+            </button>
         </form>
     </main>
 </body>

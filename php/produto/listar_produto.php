@@ -1,12 +1,12 @@
 <?php
 session_start(); //inicia a sessão
 
- //inclui o arquivo de conexão
+//inclui o arquivo de conexão
 
-// if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
-//     header('Location: ./login.php'); //redireciona para a página login.php
-//     exit(); //finaliza a execução do script
-// }
+if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
+    header('Location: ./login.php'); //redireciona para a página login.php
+    exit(); //finaliza a execução do script
+}
 
 try {
     $stmt = $pdo->prepare("SELECT * FROM PRODUTO 
@@ -35,7 +35,7 @@ try {
         }
     } else {
         $produtos = [];
-    }                                    
+    }
 } catch (PDOException $e) {
     echo "<p style='color:red;'>Erro ao listar os produtos: " . $e . "</p>"; //mensagem de erro
 }
