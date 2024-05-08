@@ -36,13 +36,14 @@ body {
 .navbar a {
   color: white;
   text-decoration: none;
-  margin: 0 1rem;
+  padding: 5px 10px;
   font-size: 1.2rem;
+  border-radius: 10px;
 }
 
 .navbar a:hover {
   color: #000000;
-  text-decoration: underline;
+  background-color: #f9a80c;
 }
 
 .navbar-index {
@@ -162,7 +163,7 @@ svg {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #949494;
+  border-bottom: 1px solid #cecece;
   margin: 50px 0 20px 0;
 }
 

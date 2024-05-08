@@ -20,9 +20,11 @@ if (!isset($_SESSION['admin_logado'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/index.css">
     <title>Produtos</title>
+    <script src="./js/date.js"></script>
 </head>
 
 <body>
+
     <header class="navbar-index">
         <img src="./images/fox.svg" alt="fox logo" />
         <button class="btn-sair">Sair</button>
@@ -67,6 +69,5 @@ if (!isset($_SESSION['admin_logado'])) {
         </section>
 </body>
 
-<script src="./js/date.js"></script>
 
 </html>

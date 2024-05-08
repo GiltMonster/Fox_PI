@@ -5,7 +5,6 @@ function updateTime() {
     
     document.getElementById("date").innerHTML = "Data: " + dateString;
 
-    setTimeout(updateTime, 1000); // Update every second
 }
 
-updateTime(); // Call the function to start updating the time
+setInterval(updateTime, 1000);

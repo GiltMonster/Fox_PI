@@ -37,7 +37,7 @@
 
 
                 </form>
-                <a class="btn-produto" href="../../pages/admin/cadastrar_administrador.php">
+                <a class="btn-produto" href="../../pages/produto/CadastrarProdutos.php">
                     <!-- <svg class="feather feather-user-plus" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                         <circle cx="8.5" cy="7" r="4" />
@@ -50,6 +50,29 @@
                 </a>
 
             </div>
+
+            <div class="card-container">
+                <div class="card-content">
+                    <img src="https://via.placeholder.com/250" alt="produto" />
+                    
+                    <div class="text-container">
+                        <div class="descricao">
+                            <h1>teste</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, in itaque possimus inventore ipsum magni reiciendis quibusdam ea odit placeat dicta, fuga, esse perferendis facere dignissimos sit ullam hic veritatis.</p>
+                        </div>
+                        
+                        <div class="quantidade-preco">
+                            <p>Preço: $$$$$$$$</p>
+                            <p>Quantidade: 10</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-buttons">
+                    <button class="btn-alterar">Alterar</button>
+                    <button class="btn-excluir">Excluir</button>
+                </div>
+            </div>
+
             <!-- <div class="container-buttons">
                 <a class="btn-produto" href="./CadastrarProdutos.php">
                     <svg class="feather feather-user-plus" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
