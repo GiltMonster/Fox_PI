@@ -31,9 +31,7 @@ if (!isset($_SESSION['admin_logado'])) {
         <section class="container">
             <div class="sub-header">
                 <h1>Seja bem-vindo, <label class="name-admin"><?= $admin["ADM_NOME"] ?></label> o que deseja ? </h1>
-                
-                    <p id="date"></p>
-                
+                <p id="date"></p>
             </div>
             <div class="container-buttons">
                 <a class="btn-produto" href="./pages/admin/painel_admin.php">
