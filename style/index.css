@@ -9,14 +9,18 @@ body {
   border-bottom: 1px solid #e5e5e5;
   padding: 0.5rem 1rem;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   flex-direction: row;
 }
 
+.navbar div {
+  display: flex;
+  align-items: center;
+}
+
 .navbar img {
-  margin-bottom: -2.5%;
-  margin-left: 270px;
+  margin-bottom: -7%;
   width: 100px;
   height: auto;
 }
@@ -38,8 +42,34 @@ body {
   text-decoration: underline;
 }
 
-.btn-sair {
-  margin-left: 37%;
+.navbar-index {
+  background-color: #3cc5ff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}
+
+.navbar-index img {
+  margin-bottom: -2.5%;
+  width: 100px;
+  height: auto;
+}
+
+.navbar-index button{
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+
+.navbar button {
   background-color: #ffffff;
   color: #000000;
   padding: 0.5rem 1rem;
@@ -62,9 +92,27 @@ body {
 
 .sub-header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
   margin: 50px 0 20px 0;
+}
+
+.sub-header h1 {
+  font-size: 2rem;
+  margin: 10px;
+}
+
+.sub-header p{
+  font-size: 1.2rem;
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.container-buttons{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px;
 }
 
 .btn-produto{
@@ -99,4 +147,10 @@ body {
 svg{
     width: 50px;
     height: 50px;
+}
+
+.name-admin{
+    font-size: 1.2em;
+    font-weight: bold;
+    color:#ffc107;
 }

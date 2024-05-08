@@ -4,9 +4,9 @@ session_start(); //inicia a sessão
 
 // var_dump($_SESSION['admin_logado']);
 if (!isset($_SESSION['admin_logado'])) {
-    // header('Location: ./pages/login/login.php'); //redireciona para a página login.php        
+    header('Location: ./pages/login/login.php'); //redireciona para a página login.php        
     exit(); //finaliza a execução do script
-}else{
+} else {
     $admin = $_SESSION['admin_logado'];
 }
 
@@ -23,16 +23,17 @@ if (!isset($_SESSION['admin_logado'])) {
 </head>
 
 <body>
-    <header class="navbar">
+    <header class="navbar-index">
         <img src="./images/fox.svg" alt="fox logo" />
-        
         <button class="btn-sair">Sair</button>
     </header>
     <main>
         <section class="container">
             <div class="sub-header">
-                <h2>Seja bem-vindo, <?= $admin["ADM_NOME"] ?></h2>
-                <p>Este é o painel de Administrador</p>
+                <h1>Seja bem-vindo, <label class="name-admin"><?= $admin["ADM_NOME"] ?></label> o que deseja ? </h1>
+                
+                    <p id="date"></p>
+                
             </div>
             <div class="container-buttons">
                 <a class="btn-produto" href="./pages/admin/painel_admin.php">
@@ -43,19 +44,31 @@ if (!isset($_SESSION['admin_logado'])) {
                         <line x1="23" x2="17" y1="11" y2="11" />
                     </svg>
                     <label>
-                        Administradores
+                        Gerenciar administradores
                     </label>
                 </a>
                 <a class="btn-produto" href="./pages/produto/painel_produtos.php">
-                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path clip-rule="evenodd" d="M20 4H4C3.44771 4 3 4.44772 3 5V19C3 19.5523 3.44772 20 4 20H20C20.5523 20 21 19.5523 21 19V5C21 4.44771 20.5523 4 20 4ZM4 2C2.34315 2 1 3.34315 1 5V19C1 20.6569 2.34315 22 4 22H20C21.6569 22 23 20.6569 23 19V5C23 3.34315 21.6569 2 20 2H4ZM6 7H8V9H6V7ZM11 7C10.4477 7 10 7.44772 10 8C10 8.55228 10.4477 9 11 9H17C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7H11ZM8 11H6V13H8V11ZM10 12C10 11.4477 10.4477 11 11 11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H11C10.4477 13 10 12.5523 10 12ZM8 15H6V17H8V15ZM10 16C10 15.4477 10.4477 15 11 15H17C17.5523 15 18 15.4477 18 16C18 16.5523 17.5523 17 17 17H11C10.4477 17 10 16.5523 10 16Z" fill="currentColor" fill-rule="evenodd" />
+                    <svg class="feather feather-user-plus" fill="currentColor" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+
+                        <path d="M229.9,70.8h0a.1.1,0,0,1-.1-.1,16.2,16.2,0,0,0-6-5.9l-88-49.5a16,16,0,0,0-15.6,0l-88,49.5a16.2,16.2,0,0,0-6,5.9.1.1,0,0,1-.1.1v.2A15,15,0,0,0,24,78.7v98.6a16.1,16.1,0,0,0,8.2,14l88,49.5a16.5,16.5,0,0,0,7.2,2h1.4a15.7,15.7,0,0,0,7-2l88-49.5a16.1,16.1,0,0,0,8.2-14V78.7A15.6,15.6,0,0,0,229.9,70.8ZM128,29.2,207.7,74,177.1,91.4,96.4,46.9Zm.9,89.6L48.4,74,80,56.2l80.8,44.5Zm7.2,103.5.8-89.6L169,114.4v38.1a8,8,0,0,0,16,0V105.3l31-17.6v89.6Z" />
                     </svg>
                     <label>
-                        Produtos
+                        Gerenciar produtos
+                    </label>
+                </a>
+                <a class="btn-produto" href="./pages/admin/painel_admin.php">
+                    <svg class="feather feather-pie-chart" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+                        <path d="M22 12A10 10 0 0 0 12 2v10z" />
+                    </svg>
+                    <label>
+                        Dashboard
                     </label>
                 </a>
             </div>
         </section>
 </body>
+
+<script src="./js/date.js"></script>
 
 </html>

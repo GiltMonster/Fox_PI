@@ -11,14 +11,16 @@
 
 <body>
     <header class="navbar">
-        <img src="../../images/fox.svg" alt="fox logo"/>
-        <nav>
-            <ul>
-                <li><a href="../../index.php">Home</a></li>
-                <li><a href="./painel_admin.php">Administradores</a></li>
-                <li><a href="../produto/painel_produtos.php">Produtos</a></li>
-            </ul>
-        </nav>
+        <div>
+            <img src="../../images/fox.svg" alt="fox logo"/>
+            <nav>
+                <ul>
+                    <li><a href="../../index.php">Home</a></li>
+                    <li><a href="./painel_admin.php">Administradores</a></li>
+                    <li><a href="../produto/painel_produtos.php">Produtos</a></li>
+                </ul>
+            </nav>
+        </div>
 
         <button class="btn-sair">Sair</button>
     </header>
