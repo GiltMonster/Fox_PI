@@ -1,39 +1,37 @@
-.container-buttons{
-    display: flex;
-    justify-content: center;
-    margin: 20px;
+.container-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 }
 
-.btn-produto{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #3cc5ff;
-    color: #000000;
-    border: 1px solid #1786b6;
-    padding: 30px 140px;
-    text-decoration: none;
-    margin: 15px;
-    cursor: pointer;
-    transition: 0.5s;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.btn-produto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3cc5ff;
+  color: #fff;
+  border: 1px solid #1786b6;
+  padding: 10px 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.btn-produto label{
-    font-size: 0.9em;
-    cursor: pointer;
-    padding: 0 0 0 10px;
+.btn-produto label {
+  font-size: 0.9em;
+  cursor: pointer;
+  padding: 0 0 0 10px;
 }
 
 .btn-produto:hover {
-    background-color: #43ADDA;
-    color: #fff;
-    padding: 30px 150px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    background-color: #43adda;
+    padding: 12px 17px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-svg{
-    width: 50px;
-    height: 50px;
+svg {
+  width: 50px;
+  height: 50px;
 }
