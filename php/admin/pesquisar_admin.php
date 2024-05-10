@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
+    header('Location: ../../pages/login/login.php'); //redireciona para a página login.php
+    exit(); //finaliza a execução do script
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
     $adm_nome = $_POST['adm_nome']; //recebe o nome do administrador
 

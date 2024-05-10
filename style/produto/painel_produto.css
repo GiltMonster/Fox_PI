@@ -39,13 +39,21 @@ svg {
 .card-container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   border: 1px solid #cecece;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+}
+
+.card-container:hover {
+  background-color: #fff3e1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .card-content {
   display: flex;
+  width: 100%;
   flex-direction: row;
   padding: 10px;
 }
@@ -54,12 +62,27 @@ svg {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  width: 100%;
 }
 
 .descricao {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
+}
+
+.descricao p{
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  transition: 2s;
+}
+
+.descricao p:hover {
+  overflow: auto;
+  -webkit-line-clamp: unset;
 }
 
 .card-container img {
@@ -70,6 +93,8 @@ svg {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  height: 100%;
+  align-items: flex-end;
 }
 
 .card-buttons {

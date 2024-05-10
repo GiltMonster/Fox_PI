@@ -116,8 +116,12 @@
                         echo "<td>" . $adm['ADM_SENHA'] . "</td>";
                         echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<p style="color:red;">Inativo</p>') . "</td>";
                         echo "<td>
-                        <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>Editar</a>
-                        <a href='./excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>Excluir</a>
+                        <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
+                            <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
+                        </a>
+                        <a href='../../php/admin/excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>
+                            <img class='excluir' src='../../images/icons/excluir.svg' alt='excluir'/>
+                        </a>
                         </td>";
                         echo "</tr>";
                     }

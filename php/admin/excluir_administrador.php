@@ -2,10 +2,10 @@
 session_start(); //inicia a sessão
 require_once('../config/conexao.php'); //inclui os métodos de conexão do arquivo conexao.php
 
-// if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
-//     header('Location:login.php'); //redireciona para a página login.php
-//     exit(); //finaliza a execução do script
-// }
+if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
+    header('Location: ../../pages/login/login.php'); //redireciona para a página login.php
+    exit(); //finaliza a execução do script
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $id = $_GET['id']; //recebe o id do administrador

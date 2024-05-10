@@ -1,10 +1,10 @@
 <?php
 session_start(); //inicia a sessão
 
-// if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
-//     header('Location:login.php'); //redireciona para a página login.php
-//     exit(); //finaliza a execução do script
-// }
+if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
+    header('Location: ../../pages/login/login.php'); //redireciona para a página login.php
+    exit(); //finaliza a execução do script
+}
 
 //se a pagina foi acessada via GET e o adm_id foi informado por path param na URL 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
