@@ -127,7 +127,12 @@
                     }
                     echo '</table>';
                 } else {
-                    echo "<p>Nenhum administrador encontrado</p>";
+                    echo '<div class="pesquisa-header">
+                    <h3>Administrador pesquisado: <label style="color:#f9a80c">' . $_POST['adm_nome'] . '</label></h3>
+                    <a class="btn-limpa-pesquisa" href="./painel_admin.php">Limpar pesquisa</a>
+                    </div>
+                    ';
+                    echo "<p style='color:red;'>Nenhum administrador encontrado</p>";
                 }
             }
 

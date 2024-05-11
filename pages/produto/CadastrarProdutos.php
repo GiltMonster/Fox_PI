@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/produto/cadastrar_produtos.css">
-    <title>Cadastrat produtos</title>
+    <title>Cadastrar produtos</title>
 </head>
 
 <body>

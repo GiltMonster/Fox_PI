@@ -37,7 +37,6 @@
                         <img src="../../images/icons/search.svg" alt="search">
                     </button>
 
-
                 </form>
                 <a class="btn-produto" href="../../pages/produto/CadastrarProdutos.php">
                     <label>
@@ -49,34 +48,86 @@
 
             <?php
             require_once('../../php/config/conexao.php');
-            include '../../php/produto/listar_produto.php';
 
-            // Itera sobre os produtos para exibi-los na tabela
-            foreach ($produtos as $produto) :
+
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+                include '../../php/produto/listar_produto.php';
+
+                // Itera sobre os produtos para exibi-los na tabela
+                foreach ($produtos as $produto) :
             ?>
+                    <div class="card-container">
+                        <div class="card-content">
+                            <img src="https://via.placeholder.com/250" alt="produto" />
+                            <div class="text-container">
+                                <div class="descricao">
+                                    <h1><?= $produto['PRODUTO_NOME'] ?></h1>
+                                    <?= $produto['PRODUTO_DESC'] ? "<p>$produto[PRODUTO_DESC]</p>" : 'Sem descrição'; ?>
+                                </div>
 
-                <div class="card-container">
-                    <div class="card-content">
-                        <img src="https://via.placeholder.com/250" alt="produto" />
-                        <div class="text-container">
-                            <div class="descricao">
-                                <h1><?= $produto['PRODUTO_NOME'] ?></h1>
-                                <?= $produto['PRODUTO_DESC'] ? "<p>$produto[PRODUTO_DESC]</p>" : 'Sem descrição';?>
-                            </div>
-
-                            <div class="quantidade-preco">
-                                <p>Preço: <?= $produto['PRODUTO_PRECO'] ?></p>
-                                <p>Categoria: <?= $produto['CATEGORIA_NOME'] ?></p>
-                                <p>Quantidade: <?= $produto['PRODUTO_QTD'] ? $produto['PRODUTO_QTD'] : "Quantidade não informada" ?></p>
+                                <div class="quantidade-preco">
+                                    <p>Preço: <?= $produto['PRODUTO_PRECO'] ?></p>
+                                    <p>Categoria: <?= $produto['CATEGORIA_NOME'] ?></p>
+                                    <p>Quantidade: <?= $produto['PRODUTO_QTD'] ? $produto['PRODUTO_QTD'] : "Quantidade não informada" ?></p>
+                                </div>
                             </div>
                         </div>
+                        <div class="card-buttons">
+                            <button class="btn-alterar">Alterar</button>
+                            <button class="btn-excluir">Excluir</button>
+                        </div>
                     </div>
-                    <div class="card-buttons">
-                        <button class="btn-alterar">Alterar</button>
-                        <button class="btn-excluir">Excluir</button>
+                    <?php endforeach;
+            } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                include_once '../../php/produto/pesquisar_produto.php';
+                if ($prods_pesquisados) {
+
+                    echo '
+                    <div class="pesquisa-header">
+                    <h3>produto pesquisado: <label style="color:#f9a80c">' . $_POST['produto_nome'] . '</label></h3>
+                    <a class="btn-limpa-pesquisa" href="./painel_produtos.php">Limpar pesquisa</a>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                    ';
+
+                    foreach ($prods_pesquisados as $produto) :
+
+                    ?>
+
+
+                        <div class="card-container">
+                            <div class="card-content">
+                                <img src="https://via.placeholder.com/250" alt="produto" />
+                                <div class="text-container">
+                                    <div class="descricao">
+                                        <h1><?= $produto['PRODUTO_NOME'] ?></h1>
+                                        <?= $produto['PRODUTO_DESC'] ? "<p>$produto[PRODUTO_DESC]</p>" : 'Sem descrição'; ?>
+                                    </div>
+
+                                    <div class="quantidade-preco">
+                                        <p>Preço: <?= $produto['PRODUTO_PRECO'] ?></p>
+                                        <p>Categoria: <?= $produto['CATEGORIA_NOME'] ?></p>
+                                        <p>Quantidade: <?= $produto['PRODUTO_QTD'] ? $produto['PRODUTO_QTD'] : "Quantidade não informada" ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-buttons">
+                                <button class="btn-alterar">Alterar</button>
+                                <button class="btn-excluir">Excluir</button>
+                            </div>
+                        </div>
+            <?php endforeach;
+                } else {
+                    echo '
+                    <div class="pesquisa-header">
+                    <h3>produto pesquisado: <label style="color:#f9a80c">' . $_POST['produto_nome'] . '</label></h3>
+                    <a class="btn-limpa-pesquisa" href="./painel_produtos.php">Limpar pesquisa</a>
+                    </div>
+                    ';
+                    echo "<p style='color:red;'>Nenhum produto encontrado</p>";
+                }
+            }
+            ?>
         </section>
     </main>
 </body>
