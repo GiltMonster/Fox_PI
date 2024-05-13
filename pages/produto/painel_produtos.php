@@ -1,3 +1,12 @@
+<?php
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -7,6 +16,7 @@
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/produto/painel_produto.css">
     <link rel="stylesheet" href="../../style/carrossel.css">
+    <link rel="stylesheet" href="../../style/alerts.css">
     <title>Painel de Produtos</title>
 </head>
 
@@ -23,7 +33,7 @@
             </nav>
         </div>
 
-        <button class="btn-sair">Sair</button>
+        <a class="btn-sair" href="./painel_produtos.php?logout">Sair</a>
     </header>
     <main>
         <section class="container">
@@ -32,7 +42,7 @@
                 <h2>Estoque</h2>
 
                 <form method="POST" class="pesquisa-form">
-                    <input type="text" placeholder="Buscar produto" name="produto_nome" />
+                    <input type="text" placeholder="Buscar produto" name="produto_nome" required/>
                     <button type="submit">
                         <img src="../../images/icons/search.svg" alt="search">
                     </button>
@@ -173,7 +183,11 @@
                     <a class="btn-limpa-pesquisa" href="./painel_produtos.php">Limpar pesquisa</a>
                     </div>
                     ';
-                    echo "<p style='color:red;'>Nenhum produto encontrado</p>";
+                    echo "
+                    <div class='notes danger'>
+                        <p>Nenhum produto encontrado</p>
+                    </div>
+                    ";
                 }
             }
             ?>

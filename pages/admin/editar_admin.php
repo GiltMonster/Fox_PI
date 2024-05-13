@@ -1,3 +1,11 @@
+<?php
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -29,7 +37,7 @@
             </nav>
         </div>
             
-        <button class="btn-sair">Sair</button>
+        <a class="btn-sair" href="../login/login.php?logout">Sair</a>
     </header>
 
     <main>
