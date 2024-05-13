@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/produto/painel_produto.css">
+    <link rel="stylesheet" href="../../style/carrossel.css">
     <title>Painel de Produtos</title>
 </head>
 
@@ -26,7 +27,6 @@
     </header>
     <main>
         <section class="container">
-
 
             <div class="pesquisa-header">
                 <h2>Estoque</h2>
@@ -59,7 +59,33 @@
             ?>
                     <div class="card-container">
                         <div class="card-content">
-                            <img src="https://via.placeholder.com/250" alt="produto" />
+
+                            <div class="slideshow-container">
+                                <?php if (isset($imagens_produto[$produto['PRODUTO_ID']]) && !empty($imagens_produto[$produto['PRODUTO_ID']])) : ?>
+                                    <?php foreach ($imagens_produto[$produto['PRODUTO_ID']] as $imagem) : ?>
+                                        <div class="mySlides fade">
+                                            <img src="<?php echo $imagem['IMAGEM_URL']; ?>" alt="<?php echo $produto['PRODUTO_NOME']; ?>" style="width: 100px;"> <!-- Substitua 'caminho_da_imagem' pelo nome correto da coluna no seu banco de dados -->
+                                        </div>
+                                    <?php endforeach; ?>
+
+                                    <div class="container-prev-next">
+                                        <a class="prev" onclick="this.parentElement.parentElement.slideshowInstance.plusSlides(-1)">&#10094;</a>
+                                        <a class="next" onclick="this.parentElement.parentElement.slideshowInstance.plusSlides(1)">&#10095;</a>
+                                    </div>
+                                <?php else : ?>
+                                    <p>Nenhuma imagem disponível.</p>
+                                <?php endif; ?>
+
+
+                                <div style="text-align:center">
+                                    <?php if (isset($imagens_produto[$produto['PRODUTO_ID']]) && !empty($imagens_produto[$produto['PRODUTO_ID']])) : ?>
+                                        <?php foreach ($imagens_produto[$produto['PRODUTO_ID']] as $imagem) : ?>
+                                            <span class="dot" onclick="this.parentElement.parentElement.slideshowInstance.currentSlide(<?= $imagem['IMAGEM_ORDEM'] ?>)"></span>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
                             <div class="text-container">
                                 <div class="descricao">
                                     <h1><?= $produto['PRODUTO_NOME'] ?></h1>
@@ -74,8 +100,8 @@
                             </div>
                         </div>
                         <div class="card-buttons">
-                            <button class="btn-alterar">Alterar</button>
-                            <button class="btn-excluir">Excluir</button>
+                            <a class="btn-alterar" href="./editar_produto.php?produto_id=<?= $produto['PRODUTO_ID'] ?>">Alterar</a>
+                            <a class="btn-excluir">Excluir</a>
                         </div>
                     </div>
                     <?php endforeach;
@@ -93,11 +119,34 @@
                     foreach ($prods_pesquisados as $produto) :
 
                     ?>
-
-
                         <div class="card-container">
                             <div class="card-content">
-                                <img src="https://via.placeholder.com/250" alt="produto" />
+
+                                <div class="slideshow-container">
+                                    <?php if (isset($imagens_produto[$produto['PRODUTO_ID']]) && !empty($imagens_produto[$produto['PRODUTO_ID']])) : ?>
+                                        <?php foreach ($imagens_produto[$produto['PRODUTO_ID']] as $imagem) : ?>
+                                            <div class="mySlides fade">
+                                                <img src="<?php echo $imagem['IMAGEM_URL']; ?>" alt="<?php echo $produto['PRODUTO_NOME']; ?>" style="width: 100px;"> <!-- Substitua 'caminho_da_imagem' pelo nome correto da coluna no seu banco de dados -->
+                                            </div>
+                                        <?php endforeach; ?>
+
+                                        <div class="container-prev-next">
+                                            <a class="prev" onclick="this.parentElement.parentElement.slideshowInstance.plusSlides(-1)">&#10094;</a>
+                                            <a class="next" onclick="this.parentElement.parentElement.slideshowInstance.plusSlides(1)">&#10095;</a>
+                                        </div>
+                                    <?php else : ?>
+                                        <p>Nenhuma imagem disponível.</p>
+                                    <?php endif; ?>
+
+                                    <div style="text-align:center">
+                                        <?php if (isset($imagens_produto[$produto['PRODUTO_ID']]) && !empty($imagens_produto[$produto['PRODUTO_ID']])) : ?>
+                                            <?php foreach ($imagens_produto[$produto['PRODUTO_ID']] as $imagem) : ?>
+                                                <span class="dot" onclick="this.parentElement.parentElement.slideshowInstance.currentSlide(<?= $imagem['IMAGEM_ORDEM'] ?>)"></span>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
                                 <div class="text-container">
                                     <div class="descricao">
                                         <h1><?= $produto['PRODUTO_NOME'] ?></h1>
@@ -112,8 +161,8 @@
                                 </div>
                             </div>
                             <div class="card-buttons">
-                                <button class="btn-alterar">Alterar</button>
-                                <button class="btn-excluir">Excluir</button>
+                                <a class="btn-alterar" href="./editar_produto.php?produto_id=<?= $produto['PRODUTO_ID'] ?>">Alterar</a>
+                                <a class="btn-excluir">Excluir</a>
                             </div>
                         </div>
             <?php endforeach;
@@ -131,5 +180,7 @@
         </section>
     </main>
 </body>
+
+<script src="../../js/carrossel.js"> </script>
 
 </html>
