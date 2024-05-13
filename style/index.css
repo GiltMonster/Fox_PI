@@ -62,8 +62,9 @@ body {
   height: auto;
 }
 
-.navbar-index button {
+.navbar-index .btn-sair {
   background-color: #ffffff;
+  text-decoration: none;
   color: #000000;
   padding: 0.5rem 1rem;
   border: none;
@@ -72,7 +73,7 @@ body {
   transition: 0.5s;
 }
 
-.navbar button {
+.navbar .btn-sair {
   background-color: #ffffff;
   color: #000000;
   padding: 0.5rem 1rem;
