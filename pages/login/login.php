@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../../style/login/login.css">
+    <link rel="stylesheet" href="../../style/alerts.css">
 </head>
 
 <body>
@@ -28,11 +29,21 @@
             </div>
             <?php
             if (isset($_GET['erro'])) { //se existir o parâmetro erro na URL
-                echo '<p style="color:red;">Nome de usuário ou senha incorretos!</p>';
+                echo '
+                <div class="alert">
+                    <span class="closebtn">&times;</span>  
+                    <strong>ERRO!</strong> E-mail ou senha incorretos.
+                </div>
+                ';
             }
 
             if (isset($_GET['ativo'])) {
-                echo '<p style="color:red;">Administrador inativo, entre em contato com RH!</p>';
+                echo '
+                <div class="alert warning">
+                    <span class="closebtn">&times;</span>  
+                    <strong>Aviso!</strong> Entre em contato com o administrador para ativar sua conta.
+                </div>
+                ';
             }
             ?>
             <button id="button" type="submit">
@@ -41,5 +52,7 @@
         </form>
     </main>
 </body>
+
+<script src="../../js/alerts.js"></script>
 
 </html>
