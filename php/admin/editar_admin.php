@@ -1,11 +1,10 @@
 <?php
 session_start(); //inicia a sessão
-require_once('../config/conexao.php'); //inclui os métodos de conexão do arquivo conexao.php
 
-// if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
-//     header('Location:login.php'); //redireciona para a página login.php
-//     exit(); //finaliza a execução do script
-// }
+if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
+    header('Location: ../../pages/login/login.php'); //redireciona para a página login.php
+    exit(); //finaliza a execução do script
+}
 
 //se a pagina foi acessada via GET e o adm_id foi informado por path param na URL 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -46,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
         $stmt->bindParam(':adm_ativo', $adm_ativo, PDO::PARAM_INT);
         $stmt->bindParam(':adm_id', $adm_id, PDO::PARAM_INT);
         $stmt->execute();
-        header('Location:listar_administrador.php');
+        header('Location:../../pages/admin/painel_admin.php');
         exit();
     } catch (PDOException $e) {
         echo "<p style='color:red;'>Erro ao atualizar o administrador: " . $e->getMessage() . "</p>";
@@ -55,8 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
 
 
 ?>
+<a href="../../pages/admin/painel_admin.php"></a>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -68,18 +68,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
 <body>
     <h2>Editar Produto</h2>
     <form action="./editar_admin.php" method="POST" enctype="multipart/form-data">
-        <input type='hidden' id="adm_id" name='adm_id' value="<?php echo $administrador['ADM_ID']; ?>" />
+        <input type='hidden' id="adm_id" name='adm_id' value="<?php //echo $administrador['ADM_ID']; ?>" />
         <label for="adm_nome">Nome do administrador: </label>
-        <input type="text" id="adm_nome" name="adm_nome" value="<?php echo $administrador['ADM_NOME']; ?>" required>
+        <input type="text" id="adm_nome" name="adm_nome" value="<?php //echo $administrador['ADM_NOME']; ?>" required>
         <p></p>
         <label for="adm_email">E-mail Admnistrador: </label>
-        <input type="text" id="adm_email" name="adm_email" value="<?php echo $administrador['ADM_EMAIL']; ?>" required>
+        <input type="text" id="adm_email" name="adm_email" value="<?php //echo $administrador['ADM_EMAIL']; ?>" required>
         <p></p>
         <label for="adm_senha">Senha administrador: </label>
-        <input type="password" minlenght="8" id="adm_senha" name="adm_senha" value="<?php echo $administrador['ADM_SENHA']; ?>" required>
+        <input type="password" minlenght="8" id="adm_senha" name="adm_senha" value="<?php //echo $administrador['ADM_SENHA']; ?>" required>
         <p></p>
         <label for="adm_ativo">Ativo</label>
-        <input type="checkbox" name="adm_ativo" id="adm_ativo" value="1" <?php echo $administrador['ADM_ATIVO'] ? 'checked' : '' ;?>>
+        <input type="checkbox" name="adm_ativo" id="adm_ativo" value="1" <?php //echo $administrador['ADM_ATIVO'] ? 'checked' : '' ;?>>
         <p></p>
         <input type="submit" value="Cadastrar">
     </form>
@@ -88,4 +88,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
 
 </body>
 
-</html>
+</html> -->

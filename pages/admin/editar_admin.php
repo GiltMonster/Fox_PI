@@ -4,12 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Administrador</title>
+    <title>Editar Administrador</title>
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/admin/cadastro_admin.css">
 </head>
 
 <body>
+
+    <?php
+    require_once '../../php/config/conexao.php';
+    include '../../php/admin/editar_admin.php';
+    ?>
+
     <header class="navbar">
         <div>
 
@@ -22,37 +28,41 @@
                 </ul>
             </nav>
         </div>
+            
         <button class="btn-sair">Sair</button>
     </header>
+
     <main>
         <section class="container">
+
             <div class="sub-header">
-                <h2>Cadastrar novo administrador</h2>
+                <h2>Editar administrador</h2>
             </div>
+
             <div class="container-form">
-                <form action="../../php/admin/cadastra_admin.php" method="post" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="campos">
+                        <input type='hidden' id="adm_id" name='adm_id' value="<?php echo $administrador['ADM_ID']; ?>" />
                         <label for="adm_nome">Nome</label>
-                        <input type="text" id="adm_nome" name="adm_nome" required>
+                        <input type="text" id="adm_nome" name="adm_nome" value="<?php echo $administrador['ADM_NOME']; ?>" required>
                     </div>
 
                     <div class="campos">
                         <label for="adm_email">E-mail</label>
-                        <input type="text" id="adm_email" name="adm_email" required>
+                        <input type="text" id="adm_email" name="adm_email" value="<?php echo $administrador['ADM_EMAIL']; ?>" required>
                     </div>
                     <div class="campos">
                         <label for="adm_senha">Senha</label>
-                        <input type="password" minlenght="8" id="adm_senha" name="adm_senha" required>
+                        <input type="password" minlenght="8" id="adm_senha" name="adm_senha" value="<?php echo $administrador['ADM_SENHA']; ?>" required>
                     </div>
-
                     <div class="campos">
                         <label for="adm_ativo">Ativo</label>
-                        <input type="checkbox" name="adm_ativo" id="adm_ativo" value="1">
-                        <label for="adm_ativo" id="txt_adm_ativo">Ativo</label>
+                        <input type="checkbox" name="adm_ativo" id="adm_ativo" value="1" <?php echo $administrador['ADM_ATIVO'] ? 'checked' : ''; ?>>
                     </div>
                     <div class="btn-group">
-                        <input class="btn-salvar" type="submit" value="Salvar" />
+                        <input class="btn-salvar" type="submit" value="Salvar">
                         <a class="btn-cancelar" href="./painel_admin.php">Cancelar</a>
+
                     </div>
                 </form>
             </div>

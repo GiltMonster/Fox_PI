@@ -11,17 +11,20 @@
 
 <body>
     <header class="navbar">
-        <img src="../../images/fox.svg" alt="fox logo"/>
-        <nav>
-            <ul>
-                <li><a href="../../index.php">Home</a></li>
-                <li><a href="./painel_admin.php">Administradores</a></li>
-                <li><a href="../produto/painel_produtos.php">Produtos</a></li>
-            </ul>
-        </nav>
+        <div>
+            <img src="../../images/fox.svg" alt="fox logo"/>
+            <nav>
+                <ul>
+                    <li><a href="../../index.php">Home</a></li>
+                    <li><a href="./painel_admin.php">Administradores</a></li>
+                    <li><a href="../produto/painel_produtos.php">Produtos</a></li>
+                </ul>
+            </nav>
+        </div>
 
         <button class="btn-sair">Sair</button>
     </header>
+    
     <main>
         <section class="container">
 
@@ -75,7 +78,7 @@
                         echo "<td>" . $adm['ADM_SENHA'] . "</td>";
                         echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<p style="color:red;">Inativo</p>') . "</td>";
                         echo "<td>
-                        <a href='../../php/admin/editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
+                        <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
                             <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
                         </a>
                         <a href='../../php/admin/excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>
@@ -113,14 +116,23 @@
                         echo "<td>" . $adm['ADM_SENHA'] . "</td>";
                         echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<p style="color:red;">Inativo</p>') . "</td>";
                         echo "<td>
-                        <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>Editar</a>
-                        <a href='./excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>Excluir</a>
+                        <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
+                            <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
+                        </a>
+                        <a href='../../php/admin/excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>
+                            <img class='excluir' src='../../images/icons/excluir.svg' alt='excluir'/>
+                        </a>
                         </td>";
                         echo "</tr>";
                     }
                     echo '</table>';
                 } else {
-                    echo "<p>Nenhum administrador encontrado</p>";
+                    echo '<div class="pesquisa-header">
+                    <h3>Administrador pesquisado: <label style="color:#f9a80c">' . $_POST['adm_nome'] . '</label></h3>
+                    <a class="btn-limpa-pesquisa" href="./painel_admin.php">Limpar pesquisa</a>
+                    </div>
+                    ';
+                    echo "<p style='color:red;'>Nenhum administrador encontrado</p>";
                 }
             }
 

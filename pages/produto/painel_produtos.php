@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/produto/painel_produto.css">
+    <link rel="stylesheet" href="../../style/carrossel.css">
     <title>Painel de Produtos</title>
 </head>
+
 <body>
-    <section>
-        <header class="navbar">
-            <h1>Fox brinquedos</h1>
+    <header class="navbar">
+        <div>
+            <img src="../../images/fox.svg" alt="fox logo" />
             <nav>
                 <ul>
                     <li><a href="../../index.php">Home</a></li>
@@ -18,35 +21,166 @@
                     <li><a href="./painel_produtos.php">Produtos</a></li>
                 </ul>
             </nav>
-        </header>
-        <main>
+        </div>
+
+        <button class="btn-sair">Sair</button>
+    </header>
+    <main>
         <section class="container">
-            <h2>Seja bem-vindo!</h2>
-            <p>Este é o painel de Produtos.</p>
-            <p>Aqui você pode:</p>
-            <div class="container-buttons">
-                <a class="btn-produto" href="./CadastrarProdutos.php">
-                    <svg class="feather feather-user-plus" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                        <circle cx="8.5" cy="7" r="4" />
-                        <line x1="20" x2="20" y1="8" y2="14" />
-                        <line x1="23" x2="17" y1="11" y2="11" />
-                    </svg>
+
+            <div class="pesquisa-header">
+                <h2>Estoque</h2>
+
+                <form method="POST" class="pesquisa-form">
+                    <input type="text" placeholder="Buscar produto" name="produto_nome" />
+                    <button type="submit">
+                        <img src="../../images/icons/search.svg" alt="search">
+                    </button>
+
+                </form>
+                <a class="btn-produto" href="../../pages/produto/CadastrarProdutos.php">
                     <label>
                         Cadastrar produto
                     </label>
                 </a>
-                <a class="btn-produto" href="../../pages/produto/listar_produto.php">
-                    <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path clip-rule="evenodd" d="M20 4H4C3.44771 4 3 4.44772 3 5V19C3 19.5523 3.44772 20 4 20H20C20.5523 20 21 19.5523 21 19V5C21 4.44771 20.5523 4 20 4ZM4 2C2.34315 2 1 3.34315 1 5V19C1 20.6569 2.34315 22 4 22H20C21.6569 22 23 20.6569 23 19V5C23 3.34315 21.6569 2 20 2H4ZM6 7H8V9H6V7ZM11 7C10.4477 7 10 7.44772 10 8C10 8.55228 10.4477 9 11 9H17C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7H11ZM8 11H6V13H8V11ZM10 12C10 11.4477 10.4477 11 11 11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H11C10.4477 13 10 12.5523 10 12ZM8 15H6V17H8V15ZM10 16C10 15.4477 10.4477 15 11 15H17C17.5523 15 18 15.4477 18 16C18 16.5523 17.5523 17 17 17H11C10.4477 17 10 16.5523 10 16Z" fill="currentColor" fill-rule="evenodd" />
-                    </svg>
-                    <label>
-                        Listar produtos
-                    </label>
-                </a>
+
             </div>
+
+            <?php
+            require_once('../../php/config/conexao.php');
+
+
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+                include '../../php/produto/listar_produto.php';
+
+                // Itera sobre os produtos para exibi-los na tabela
+                foreach ($produtos as $produto) :
+            ?>
+                    <div class="card-container">
+                        <div class="card-content">
+
+                            <div class="slideshow-container">
+                                <?php if (isset($imagens_produto[$produto['PRODUTO_ID']]) && !empty($imagens_produto[$produto['PRODUTO_ID']])) : ?>
+                                    <?php foreach ($imagens_produto[$produto['PRODUTO_ID']] as $imagem) : ?>
+                                        <div class="mySlides fade">
+                                            <img src="<?php echo $imagem['IMAGEM_URL']; ?>" alt="<?php echo $produto['PRODUTO_NOME']; ?>" style="width: 100px;"> <!-- Substitua 'caminho_da_imagem' pelo nome correto da coluna no seu banco de dados -->
+                                        </div>
+                                    <?php endforeach; ?>
+
+                                    <div class="container-prev-next">
+                                        <a class="prev" onclick="this.parentElement.parentElement.slideshowInstance.plusSlides(-1)">&#10094;</a>
+                                        <a class="next" onclick="this.parentElement.parentElement.slideshowInstance.plusSlides(1)">&#10095;</a>
+                                    </div>
+                                <?php else : ?>
+                                    <p>Nenhuma imagem disponível.</p>
+                                <?php endif; ?>
+
+
+                                <div style="text-align:center">
+                                    <?php if (isset($imagens_produto[$produto['PRODUTO_ID']]) && !empty($imagens_produto[$produto['PRODUTO_ID']])) : ?>
+                                        <?php foreach ($imagens_produto[$produto['PRODUTO_ID']] as $imagem) : ?>
+                                            <span class="dot" onclick="this.parentElement.parentElement.slideshowInstance.currentSlide(<?= $imagem['IMAGEM_ORDEM'] ?>)"></span>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="text-container">
+                                <div class="descricao">
+                                    <h1><?= $produto['PRODUTO_NOME'] ?></h1>
+                                    <?= $produto['PRODUTO_DESC'] ? "<p>$produto[PRODUTO_DESC]</p>" : 'Sem descrição'; ?>
+                                </div>
+
+                                <div class="quantidade-preco">
+                                    <p>Preço: <?= $produto['PRODUTO_PRECO'] ?></p>
+                                    <p>Categoria: <?= $produto['CATEGORIA_NOME'] ?></p>
+                                    <p>Quantidade: <?= $produto['PRODUTO_QTD'] ? $produto['PRODUTO_QTD'] : "Quantidade não informada" ?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-buttons">
+                            <a class="btn-alterar" href="./editar_produto.php?produto_id=<?= $produto['PRODUTO_ID'] ?>">Alterar</a>
+                            <a class="btn-excluir">Excluir</a>
+                        </div>
+                    </div>
+                    <?php endforeach;
+            } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                include_once '../../php/produto/pesquisar_produto.php';
+                if ($prods_pesquisados) {
+
+                    echo '
+                    <div class="pesquisa-header">
+                    <h3>produto pesquisado: <label style="color:#f9a80c">' . $_POST['produto_nome'] . '</label></h3>
+                    <a class="btn-limpa-pesquisa" href="./painel_produtos.php">Limpar pesquisa</a>
+                    </div>
+                    ';
+
+                    foreach ($prods_pesquisados as $produto) :
+
+                    ?>
+                        <div class="card-container">
+                            <div class="card-content">
+
+                                <div class="slideshow-container">
+                                    <?php if (isset($imagens_produto[$produto['PRODUTO_ID']]) && !empty($imagens_produto[$produto['PRODUTO_ID']])) : ?>
+                                        <?php foreach ($imagens_produto[$produto['PRODUTO_ID']] as $imagem) : ?>
+                                            <div class="mySlides fade">
+                                                <img src="<?php echo $imagem['IMAGEM_URL']; ?>" alt="<?php echo $produto['PRODUTO_NOME']; ?>" style="width: 100px;"> <!-- Substitua 'caminho_da_imagem' pelo nome correto da coluna no seu banco de dados -->
+                                            </div>
+                                        <?php endforeach; ?>
+
+                                        <div class="container-prev-next">
+                                            <a class="prev" onclick="this.parentElement.parentElement.slideshowInstance.plusSlides(-1)">&#10094;</a>
+                                            <a class="next" onclick="this.parentElement.parentElement.slideshowInstance.plusSlides(1)">&#10095;</a>
+                                        </div>
+                                    <?php else : ?>
+                                        <p>Nenhuma imagem disponível.</p>
+                                    <?php endif; ?>
+
+                                    <div style="text-align:center">
+                                        <?php if (isset($imagens_produto[$produto['PRODUTO_ID']]) && !empty($imagens_produto[$produto['PRODUTO_ID']])) : ?>
+                                            <?php foreach ($imagens_produto[$produto['PRODUTO_ID']] as $imagem) : ?>
+                                                <span class="dot" onclick="this.parentElement.parentElement.slideshowInstance.currentSlide(<?= $imagem['IMAGEM_ORDEM'] ?>)"></span>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <div class="text-container">
+                                    <div class="descricao">
+                                        <h1><?= $produto['PRODUTO_NOME'] ?></h1>
+                                        <?= $produto['PRODUTO_DESC'] ? "<p>$produto[PRODUTO_DESC]</p>" : 'Sem descrição'; ?>
+                                    </div>
+
+                                    <div class="quantidade-preco">
+                                        <p>Preço: <?= $produto['PRODUTO_PRECO'] ?></p>
+                                        <p>Categoria: <?= $produto['CATEGORIA_NOME'] ?></p>
+                                        <p>Quantidade: <?= $produto['PRODUTO_QTD'] ? $produto['PRODUTO_QTD'] : "Quantidade não informada" ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-buttons">
+                                <a class="btn-alterar" href="./editar_produto.php?produto_id=<?= $produto['PRODUTO_ID'] ?>">Alterar</a>
+                                <a class="btn-excluir">Excluir</a>
+                            </div>
+                        </div>
+            <?php endforeach;
+                } else {
+                    echo '
+                    <div class="pesquisa-header">
+                    <h3>produto pesquisado: <label style="color:#f9a80c">' . $_POST['produto_nome'] . '</label></h3>
+                    <a class="btn-limpa-pesquisa" href="./painel_produtos.php">Limpar pesquisa</a>
+                    </div>
+                    ';
+                    echo "<p style='color:red;'>Nenhum produto encontrado</p>";
+                }
+            }
+            ?>
         </section>
     </main>
-    </section>
 </body>
+
+<script src="../../js/carrossel.js"> </script>
+
 </html>

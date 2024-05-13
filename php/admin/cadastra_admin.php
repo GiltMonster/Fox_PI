@@ -2,17 +2,17 @@
 session_start(); // inicia a sessão
 require_once('../config/conexao.php'); // inclui os métodos de conexão do arquivo conexao.php
 
-// if (!isset($_SESSION['admin_logado'])) { // se não existir a sessão admin_logado
-//     header('Location: login.php'); // redireciona para a página login.php
-//     exit(); // finaliza a execução do script
-// }
+if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
+    header('Location: ../../pages/login/login.php'); //redireciona para a página login.php
+    exit(); //finaliza a execução do script
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { // se o formulário foi submetido
     $adm_nome = $_POST['adm_nome']; // recebe o nome adm
     $adm_email = $_POST['adm_email']; // recebe email
     $adm_senha = $_POST['adm_senha']; // recebe senha
-    $adm_ativo = isset($_POST['adm_ativo'])?1:0; //recebe informação se esta ativo
-    
+    $adm_ativo = isset($_POST['adm_ativo']) ? 1 : 0; //recebe informação se esta ativo
+
 
     try {
         $sql = "INSERT INTO ADMINISTRADOR (ADM_NOME, ADM_EMAIL, ADM_SENHA, ADM_ATIVO) 
@@ -25,10 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // se o formulário foi submetido
 
         $query->execute(); // executa a consulta SQL
 
-        echo "<p style='color:green;'>Produto cadastrado com sucesso!</p>"; // mensagem de sucesso
+        //echo "<p style='color:green;'>Produto cadastrado com sucesso!</p>"; // mensagem de sucesso
 
     } catch (PDOException $e) {
         echo "<p style='color:red;'>Erro ao cadastrar o administrador: " . $e->getMessage() . "</p>"; // mensagem de erro
     }
 }
-?>
