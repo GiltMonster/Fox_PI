@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/admin/painel_admin.css">
     <link rel="stylesheet" href="../../style/index.css">
+    <link rel="stylesheet" href="../../style/alerts.css" >
     <title>Painel administrador</title>
 </head>
 
@@ -32,7 +33,7 @@
                 <h2>Administrador</h2>
 
                 <form method="POST" class="pesquisa-form">
-                    <input type="text" placeholder="Buscar administrador" name="adm_nome" />
+                    <input type="text" placeholder="Buscar administrador" name="adm_nome" required />
                     <button type="submit">
                         <img src="../../images/icons/search.svg" alt="search">
                     </button>
@@ -132,7 +133,11 @@
                     <a class="btn-limpa-pesquisa" href="./painel_admin.php">Limpar pesquisa</a>
                     </div>
                     ';
-                    echo "<p style='color:red;'>Nenhum administrador encontrado</p>";
+                    echo "
+                    <div class='notes danger'>
+                        <p>Nenhum administrador encontrado</p>
+                    </div>
+                    ";
                 }
             }
 
