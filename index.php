@@ -10,6 +10,11 @@ if (!isset($_SESSION['admin_logado'])) {
     $admin = $_SESSION['admin_logado'];
 }
 
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: ./pages/login/login.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +32,7 @@ if (!isset($_SESSION['admin_logado'])) {
 
     <header class="navbar-index">
         <img src="./images/fox.svg" alt="fox logo" />
-        <button class="btn-sair">Sair</button>
+        <a class="btn-sair" href="./index.php?logout" >Sair</a>
     </header>
     <main>
         <section class="container">
