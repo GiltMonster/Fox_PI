@@ -114,8 +114,7 @@ body {
 
 .container-buttons {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   margin: 20px;
 }
 
