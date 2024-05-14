@@ -14,14 +14,14 @@ if (isset($_GET['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/admin/painel_admin.css">
     <link rel="stylesheet" href="../../style/index.css">
-    <link rel="stylesheet" href="../../style/alerts.css" >
+    <link rel="stylesheet" href="../../style/alerts.css">
     <title>Painel administrador</title>
 </head>
 
 <body>
     <header class="navbar">
         <div>
-            <img src="../../images/fox.svg" alt="fox logo"/>
+            <img src="../../images/fox.svg" alt="fox logo" />
             <nav>
                 <ul>
                     <li><a href="../../index.php">Home</a></li>
@@ -33,7 +33,7 @@ if (isset($_GET['logout'])) {
 
         <a class="btn-sair" href="./painel_admin.php?logout">Sair</a>
     </header>
-    
+
     <main>
         <section class="container">
 
@@ -49,20 +49,36 @@ if (isset($_GET['logout'])) {
 
                 </form>
                 <a class="btn-admin" href="../../pages/admin/cadastrar_administrador.php">
-                    <!-- <svg class="feather feather-user-plus" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                        <circle cx="8.5" cy="7" r="4" />
-                        <line x1="20" x2="20" y1="8" y2="14" />
-                        <line x1="23" x2="17" y1="11" y2="11" />
-                    </svg> -->
                     <label>
                         Cadastrar administrador
                     </label>
                 </a>
 
             </div>
-
             <?php
+            if (isset($_GET['sucesso'])) {
+                echo '
+                <div class="alert alert-success">
+                    <span class="closebtn">&times;</span>
+                    <strong>Sucesso!</strong> Administrador cadastrado com sucesso.
+                </div>
+                ';
+            } elseif (isset($_GET['excluido'])) {
+                echo '
+                <div class="alert alert-success">
+                    <span class="closebtn">&times;</span>
+                    Sucesso administrador <strong>excluído</strong> com sucesso.
+                </div>
+                ';
+            } elseif (isset($_GET['erro'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Ocorreu um erro ao excluir o administrador.
+                </div>
+                    ';
+            }
+
             require_once('../../php/config/conexao.php');
 
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -154,5 +170,6 @@ if (isset($_GET['logout'])) {
         </section>
     </main>
 </body>
+<script src="../../js/alerts.js"></script>
 
 </html>

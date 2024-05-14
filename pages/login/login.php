@@ -44,7 +44,7 @@ session_destroy();
 
             if (isset($_GET['ativo'])) {
                 echo '
-                <div class="alert warning">
+                <div class="alert alert-warning">
                     <span class="closebtn">&times;</span>  
                     <strong>Aviso!</strong> Entre em contato com o administrador para ativar sua conta.
                 </div>

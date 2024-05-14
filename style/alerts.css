@@ -7,13 +7,13 @@
   margin-bottom: 15px;
 }
 
-.alert.success {
+.alert.alert-success {
   background-color: #04aa6d;
 }
-.alert.info {
+.alert.alert-info {
   background-color: #2196f3;
 }
-.alert.warning {
+.alert.alert-warning {
   background-color: #ff9800;
 }
 

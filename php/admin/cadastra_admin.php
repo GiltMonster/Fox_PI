@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // se o formulário foi submetido
 
         $query->execute(); // executa a consulta SQL
 
+        header('Location: ../../pages/admin/painel_admin.php?sucesso');
+
         //echo "<p style='color:green;'>Produto cadastrado com sucesso!</p>"; // mensagem de sucesso
 
     } catch (PDOException $e) {
