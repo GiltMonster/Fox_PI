@@ -3,7 +3,7 @@ session_start(); //inicia a sessão
 require_once('../../php/config/conexao.php'); //inclui os metodos de conexão do arquivo conexao.php
 
 if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
-    header('Location: ./login.php'); //redireciona para a página login.php
+    header('Location: ../../pages/login/login.php'); //redireciona para a página login.php
     exit(); //finaliza a execução do script
 }
 
@@ -53,22 +53,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo 'Erro ao executar a cadastrar estoque: ' . $e->getMessage();
         }
 
-        try {
-            //Inserindo imagens no BD
-            foreach ($imagem_urls as $index => $url) {
-                $ordem = $imagem_ordens[$index];
-                $sql_imagem = "INSERT INTO PRODUTO_IMAGEM(IMAGEM_URL, PRODUTO_ID, IMAGEM_ORDEM ) VALUES (:url_imagem, :produto_id, :ordem_imagem)";
-                $stmt_imagem = $pdo->prepare($sql_imagem);
-                $stmt_imagem->bindParam(':url_imagem', $url, PDO::PARAM_STR);
-                $stmt_imagem->bindParam(':produto_id', $produto_id, PDO::PARAM_STR);
-                $stmt_imagem->bindParam(':ordem_imagem', $ordem, PDO::PARAM_INT);
-                $stmt_imagem->execute();
+        if ($imagem_urls) {
+            try {
+                //Inserindo imagens no BD
+                foreach ($imagem_urls as $index => $url) {
+                    $ordem = $imagem_ordens[$index];
+                    $sql_imagem = "INSERT INTO PRODUTO_IMAGEM(IMAGEM_URL, PRODUTO_ID, IMAGEM_ORDEM ) VALUES (:url_imagem, :produto_id, :ordem_imagem)";
+                    $stmt_imagem = $pdo->prepare($sql_imagem);
+                    $stmt_imagem->bindParam(':url_imagem', $url, PDO::PARAM_STR);
+                    $stmt_imagem->bindParam(':produto_id', $produto_id, PDO::PARAM_STR);
+                    $stmt_imagem->bindParam(':ordem_imagem', $ordem, PDO::PARAM_INT);
+                    $stmt_imagem->execute();
+                }
+                header('Location: ../../pages/produto/painel_produtos.php?sucesso');
+            } catch (PDOException $th) {
+                header('Location: ../../pages/produto/painel_produtos.php?erro');
+                //$th->getMessage();
             }
-            echo "<p style='color:green;'>Produto cadastrado com sucesso</p>";
-        } catch (PDOException $th) {
-            echo 'Erro ao executar a cadastrar imagem: ' . $th->getMessage();
+        } else {
+            header('Location: ../../pages/produto/painel_produtos.php?sucesso');
         }
     } catch (PDOException $e) {
-        echo 'Erro ao executar a cadastrar produto: ' . $e->getMessage();
+        header('Location: ../../pages/produto/painel_produtos.php?erro');
+        //$e->getMessage();
     }
 }

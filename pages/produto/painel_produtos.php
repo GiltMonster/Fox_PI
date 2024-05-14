@@ -42,7 +42,7 @@ if (isset($_GET['logout'])) {
                 <h2>Estoque</h2>
 
                 <form method="POST" class="pesquisa-form">
-                    <input type="text" placeholder="Buscar produto" name="produto_nome" required/>
+                    <input type="text" placeholder="Buscar produto" name="produto_nome" required />
                     <button type="submit">
                         <img src="../../images/icons/search.svg" alt="search">
                     </button>
@@ -57,6 +57,30 @@ if (isset($_GET['logout'])) {
             </div>
 
             <?php
+
+            if (isset($_GET['sucesso'])) {
+                echo '
+                <div class="alert alert-success">
+                    <span class="closebtn">&times;</span>
+                    <strong>Sucesso!</strong> Produto cadastrado com sucesso.
+                </div>
+                ';
+            } elseif (isset($_GET['excluido'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Sucesso!</strong> Produto excluído com sucesso.
+                </div>
+                ';
+            } elseif (isset($_GET['erro'])) {
+                echo '
+                <div class="alert alert-success">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Ocorreu um erro ao excluir o produto.
+                </div>
+                    ';
+            }
+
             require_once('../../php/config/conexao.php');
 
 
@@ -196,5 +220,6 @@ if (isset($_GET['logout'])) {
 </body>
 
 <script src="../../js/carrossel.js"> </script>
+<script src="../../js/alerts.js"></script>
 
 </html>
