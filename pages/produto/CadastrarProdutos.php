@@ -89,7 +89,7 @@ if (isset($_GET['logout'])) {
                         <label for="categoria_id">Categoria do produto:</label>
                         <select name="categoria_id" id="categoria_id" require>
                             <?php
-
+                            include '../../php/categoria/listar_categoria.php';
                             // var_dump($categorias);
                             //loop para exibir as categorias
                             foreach ($categorias as $categoria) :
