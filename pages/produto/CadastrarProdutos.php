@@ -89,9 +89,8 @@ if (isset($_GET['logout'])) {
                         <label for="categoria_id">Categoria do produto:</label>
                         <select name="categoria_id" id="categoria_id" require>
                             <?php
-                            include '../../php/categoria/listar_categoria.php';
-                            // var_dump($categorias);
-                            //loop para exibir as categorias
+                            include '../../php/categoria/listar_ativos.php';
+
                             foreach ($categorias as $categoria) :
                             ?>
                                 <option value="<?php echo $categoria['CATEGORIA_ID']; ?>"><?php echo $categoria['CATEGORIA_NOME']; ?></option>

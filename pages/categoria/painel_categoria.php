@@ -1,3 +1,10 @@
+<?php
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: ../login/login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -164,7 +171,16 @@
                         }
                         echo '</table>';
                     } else {
-                        echo '<p>Nenhuma categoria encontrada.</p>';
+                        echo '<div class="pesquisa-header">
+                    <h3>categoria pesquisada: <label style="color:#f9a80c">' . $_POST['categoria_nome'] . '</label></h3>
+                    <a class="btn-limpa-pesquisa" href="./painel_categoria.php">Limpar pesquisa</a>
+                    </div>
+                    ';
+                    echo "
+                    <div class='notes danger'>
+                        <p>Nenhuma categoria encontrada</p>
+                    </div>
+                    ";
                     }
                 }
 

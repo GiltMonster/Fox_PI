@@ -77,6 +77,27 @@ if (isset($_GET['logout'])) {
                     <strong>Erro!</strong> Ocorreu um erro ao excluir o administrador.
                 </div>
                     ';
+            } elseif (isset($_GET['editado'])) {
+                echo '
+                <div class="alert alert-info">
+                    <span class="closebtn">&times;</span>
+                    <strong>Sucesso!</strong> Administrador editado com sucesso.
+                </div>
+                ';
+            } elseif (isset($_GET['erro_editar'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Ocorreu um erro ao editar o administrador.
+                </div>
+                ';
+            }elseif (isset($_GET['erro_pesquisa'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Ocorreu um erro ao pesquisar o administrador.
+                </div>
+                ';
             }
 
             require_once('../../php/config/conexao.php');
