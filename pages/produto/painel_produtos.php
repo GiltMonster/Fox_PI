@@ -59,26 +59,40 @@ if (isset($_GET['logout'])) {
             <?php
 
             if (isset($_GET['sucesso'])) {
-                echo '
-                <div class="alert alert-success">
-                    <span class="closebtn">&times;</span>
-                    <strong>Sucesso!</strong> Produto cadastrado com sucesso.
-                </div>
-                ';
-            } elseif (isset($_GET['excluido'])) {
-                echo '
-                <div class="alert alert-danger">
-                    <span class="closebtn">&times;</span>
-                    <strong>Sucesso!</strong> Produto excluído com sucesso.
-                </div>
-                ';
-            } elseif (isset($_GET['erro'])) {
-                echo '
-                <div class="alert alert-success">
-                    <span class="closebtn">&times;</span>
-                    <strong>Erro!</strong> Ocorreu um erro ao excluir o produto.
-                </div>
-                    ';
+                echo '<div class="alert alert-success">
+                <span class="closebtn">&times;</span>  
+                <strong>Sucesso!</strong> Produto cadastrado com sucesso.
+            </div>';
+            } else if (isset($_GET['erro'])) {
+                echo '<div class="alert alert-danger">
+                <span class="closebtn">&times;</span>  
+                <strong>Erro!</strong> Não foi possível cadastrar o produto.
+            </div>';
+            } else if (isset($_GET['excluido'])) {
+                echo '<div class="alert alert-success">
+                <span class="closebtn">&times;</span>  
+                <strong>Sucesso!</strong> produto excluído com sucesso.
+            </div>';
+            } else if (isset($_GET['erro_excluir'])) {
+                echo '<div class="alert alert-danger">
+                <span class="closebtn">&times;</span>  
+                <strong>Erro!</strong> Não foi possível excluir o produto.
+            </div>';
+            } else if (isset($_GET['editado'])) {
+                echo '<div class="alert alert-info">
+                <span class="closebtn">&times;</span>  
+                <strong>Sucesso!</strong> produto editado com sucesso.
+            </div>';
+            } else if (isset($_GET['erro_editar'])) {
+                echo '<div class="alert alert-danger">
+                <span class="closebtn">&times;</span>  
+                <strong>Erro!</strong> Não foi possível editar o produto.
+              </div>';
+            } else if (isset($_GET['erro_pesquisar'])) {
+                echo '<div class="alert alert-danger">
+                <span class="closebtn">&times;</span>  
+                <strong>Erro!</strong> Não foi possível pesquisar o produto.
+            </div>';
             }
 
             require_once('../../php/config/conexao.php');

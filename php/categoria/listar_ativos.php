@@ -9,7 +9,7 @@ if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logad
 }
 
 try{
-    $stmt = $pdo->prepare("SELECT * FROM CATEGORIA");
+    $stmt = $pdo->prepare("SELECT * FROM CATEGORIA WHERE CATEGORIA.CATEGORIA_ATIVO = 1");
     $stmt->execute();
     if ($stmt->rowCount() > 0) { //se retornar algum registro
         $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC); //retorna um array associativo com os registros
@@ -17,7 +17,8 @@ try{
         $categorias = [];
     }
 } catch (PDOException $e) {
-    echo "<p style='color:red;'>Erro ao listar as Categorias: " . $e . "</p>"; //mensagem de erro
+    header('Location: ../../pages/categoria/painel_categoria.php?erro_pesquisar');
+    
 }
 
 ?>

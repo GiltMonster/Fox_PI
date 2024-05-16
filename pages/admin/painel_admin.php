@@ -77,6 +77,27 @@ if (isset($_GET['logout'])) {
                     <strong>Erro!</strong> Ocorreu um erro ao excluir o administrador.
                 </div>
                     ';
+            } elseif (isset($_GET['editado'])) {
+                echo '
+                <div class="alert alert-info">
+                    <span class="closebtn">&times;</span>
+                    <strong>Sucesso!</strong> Administrador editado com sucesso.
+                </div>
+                ';
+            } elseif (isset($_GET['erro_editar'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Ocorreu um erro ao editar o administrador.
+                </div>
+                ';
+            }elseif (isset($_GET['erro_pesquisa'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Ocorreu um erro ao pesquisar o administrador.
+                </div>
+                ';
             }
 
             require_once('../../php/config/conexao.php');
@@ -101,7 +122,7 @@ if (isset($_GET['logout'])) {
                         echo "<td>" . $adm['ADM_EMAIL'] . "</td>";
                         echo "<td>" . $adm['ADM_NOME'] . "</td>";
                         echo "<td>" . $adm['ADM_SENHA'] . "</td>";
-                        echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<p style="color:red;">Inativo</p>') . "</td>";
+                        echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<label style="color:red;">Inativo</label>') . "</td>";
                         echo "<td>
                         <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
                             <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
@@ -139,7 +160,7 @@ if (isset($_GET['logout'])) {
                         echo "<td>" . $adm['ADM_EMAIL'] . "</td>";
                         echo "<td>" . $adm['ADM_NOME'] . "</td>";
                         echo "<td>" . $adm['ADM_SENHA'] . "</td>";
-                        echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<p style="color:red;">Inativo</p>') . "</td>";
+                        echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<label style="color:red;">Inativo</label>') . "</td>";
                         echo "<td>
                         <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
                             <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
