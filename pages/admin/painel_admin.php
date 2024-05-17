@@ -15,6 +15,7 @@ if (isset($_GET['logout'])) {
     <link rel="stylesheet" href="../../style/admin/painel_admin.css">
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/alerts.css">
+    <link rel="icon" href="../../favicon.ico" />
     <title>Painel administrador</title>
 </head>
 
@@ -98,6 +99,13 @@ if (isset($_GET['logout'])) {
                     <strong>Erro!</strong> Ocorreu um erro ao pesquisar o administrador.
                 </div>
                 ';
+            }elseif (isset($_GET['op_excluir'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Operação de exclusão em desenvolvimento.
+                </div>
+                ';
             }
 
             require_once('../../php/config/conexao.php');
@@ -127,7 +135,7 @@ if (isset($_GET['logout'])) {
                         <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
                             <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
                         </a>
-                        <a href='../../php/admin/excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>
+                        <a href='./painel_admin.php?op_excluir'>
                             <img class='excluir' src='../../images/icons/excluir.svg' alt='excluir'/>
                         </a>
                         </td>";
@@ -165,7 +173,7 @@ if (isset($_GET['logout'])) {
                         <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
                             <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
                         </a>
-                        <a href='../../php/admin/excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>
+                        <a href='./painel_admin.php?op_excluir'>
                             <img class='excluir' src='../../images/icons/excluir.svg' alt='excluir'/>
                         </a>
                         </td>";

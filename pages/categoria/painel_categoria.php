@@ -15,6 +15,7 @@ if (isset($_GET['logout'])) {
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/categoria/painel_categoria.css">
     <link rel="stylesheet" href="../../style/alerts.css">
+    <link rel="icon" href="../../favicon.ico" />
 </head>
 
 <body>
@@ -91,6 +92,13 @@ if (isset($_GET['logout'])) {
                     <span class="closebtn">&times;</span>  
                     <strong>Erro!</strong> Não foi possível pesquisar a categoria.
                   </div>';
+                } elseif (isset($_GET['op_excluir'])) {
+                    echo '
+                    <div class="alert alert-danger">
+                        <span class="closebtn">&times;</span>
+                        <strong>Erro!</strong> Operação de exclusão em desenvolvimento.
+                    </div>
+                    ';
                 }
 
                 ?>
@@ -122,7 +130,7 @@ if (isset($_GET['logout'])) {
                             <a href='./editar_categoria.php?categoria_id=" . $categoria['CATEGORIA_ID'] . "'>
                                 <img src='../../images/icons/editar.svg' alt='editar'>
                             </a>
-                            <a href='../../php/categoria/excluir_categoria.php?categoria_id=" . $categoria['CATEGORIA_ID'] . "'>
+                            <a href='./painel_categoria.php?op_excluir'>
                                 <img src='../../images/icons/excluir.svg' alt='deletar'>
                             </a>
                             </td>";
