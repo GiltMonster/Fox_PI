@@ -71,7 +71,7 @@ if (isset($_GET['logout'])) {
                         Gerenciar as categorias dos produtos.
                     </label>
                 </a>
-                <a class="btn-produto" href="./pages/admin/painel_admin.php">
+                <a class="btn-produto" href="./pages/dados/painel_dados.php">
                     <svg class="feather feather-pie-chart" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
                         <path d="M22 12A10 10 0 0 0 12 2v10z" />

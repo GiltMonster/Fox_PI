@@ -5,15 +5,6 @@ session_start(); //inicia a sessão
 require_once('../../php/config/conexao.php'); //inclui o arquivo de conexão
 
 $imagens_produto = [];
-
-try {
-    $categorias = $pdo->prepare('SELECT * FROM CATEGORIA');
-    $categorias->execute(); //executa a query
-    $categorias = $categorias->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo 'Erro ao executar a ao pegar a categoria: ' . $e->getMessage();
-}
-
 $produto_id = $_GET['produto_id'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -42,14 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         $imagens_produto = [];
                     }
                 }
-
-                echo "<pre> produtos";
-                print_r($produto);
-                echo "</pre>";
-
-                echo "<pre> produtos IMG";
-                print_r($imagens_produto);
-                echo "</pre>";
             } else {
                 echo "<p style='color:red;'>Produto não encontrado!</p>";
                 exit();
@@ -132,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt_imagem->execute();
             }
 
-            header('Location: ./listar_produto.php');
+            header('Location: ./painel_produtos.php?editado');
         } catch (PDOException $th) {
             echo 'Erro ao executar a atualizar imagem: ' . $th->getMessage();
         }
@@ -152,104 +135,108 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/produto/cadastrar_produtos.css">
     <link rel="icon" href="../../favicon.ico" />
-    <title>Excluir ou Editar os Produtos</title>
+    <title>Editar os Produtos</title>
 </head>
 
 <body>
 
     <header class="navbar">
-        <h1>Fox brinquedos</h1>
-        <nav>
-            <ul>
-                <li><a href="../../index.php">Home</a></li>
-                <li><a href="../admin/painel_admin.php">Administradores</a></li>
-                <li><a href="./painel_produtos.php">Produtos</a></li>
-            </ul>
-        </nav>
+        <div>
+            <img src="../../images/fox.svg" alt="fox logo" />
+            <nav>
+                <ul>
+                    <li><a href="../../index.php">Home</a></li>
+                    <li><a href="../../pages/admin/painel_admin.php">Administradores</a></li>
+                    <li><a href="./painel_produtos.php">Produtos</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <a class="btn-sair" href="./painel_produtos.php?logout">Sair</a>
     </header>
 
     <main>
         <section class="container">
-            <h2>Seja bem-vindo!</h2>
-            <p>Para cadastrar um produto, preencha os campos abaixo:</p>
 
-            <script>
-                function adicionarImagem() {
-                    const containerImagens = document.getElementById('containerImagens');
-                    const novoDiv = document.createElement('div');
-                    novoDiv.className = 'imagem-input';
-
-                    const novoInputURL = document.createElement('input');
-                    novoInputURL.type = "text";
-                    novoInputURL.name = 'imagem_url[]';
-                    novoInputURL.placeholder = 'URL da imagem';
-                    novoInputURL.required = true;
-
-                    const novoInputOrdem = document.createElement('input');
-                    novoInputOrdem.type = "number";
-                    novoInputOrdem.name = 'imagem_ordem[]';
-                    novoInputOrdem.placeholder = 'Ordem';
-                    novoInputOrdem.min = '1'
-                    novoInputOrdem.required = true;
-
-
-                    novoDiv.appendChild(novoInputURL);
-                    novoDiv.appendChild(novoInputOrdem);
-
-                    containerImagens.appendChild(novoDiv);
-                }
-            </script>
-
-            <div class="form-container">
-                <form method="post" enctype="multipart/form-data">
-                    <label for="nome">Nome do produto:</label>
-                    <input type="text" id="nome" name="nome" value="<?php echo $produto['PRODUTO_NOME']; ?>">
-
-                    <label for="descricao">Descrição do produto:</label>
-                    <input type="text" id="descricao" name="descricao" value="<?php echo $produto['PRODUTO_DESC']; ?>"></input>
-
-                    <label for="preco">Preço do produto:</label>
-                    <input type="number" id="preco" name="preco" step="10" value="<?php echo $produto['PRODUTO_PRECO']; ?>">
-
-                    <label for="desconto">Desconto do produto:</label>
-                    <input type="number" id="desconto" name="desconto" step="10" value="<?php echo $produto['PRODUTO_DESCONTO']; ?>">
-
-                    <label for="produto_qtd">Quantidade em estoque:</label>
-                    <input type="number" id="produto_qtd" name="produto_qtd" step="1" value="<?php echo $produto['PRODUTO_QTD']; ?>">
-
-                    <label for="ativo">Produto ativo:</label>
-                    <input type="checkbox" id="ativo" name="ativo" value="1" <?php echo $produto['PRODUTO_ATIVO'] ? 'checked' : ''; ?>>
-
-                    <label for="categoria_id">Categoria do produto:</label>
-                    <select name="categoria_id" id="categoria_id" value="<?php echo $produto['CATEGORIA_ID']; ?>">
-                        <?php
-                        //loop para exibir as categorias
-                        foreach ($categorias as $categoria) :
-                        ?>
-                            <option value="<?php echo $categoria['CATEGORIA_ID']; ?>"><?php echo $categoria['CATEGORIA_NOME']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-
-                    <a href="../../pages/categoria/cadastrar_categoria.php">+</a>
-
-                    <?php
-                    foreach ($imagens_produto as $imagem) {
-                        echo '<div id="containerImagens">';
-                        echo '<input type="text" name="imagem_url[]" placeholder="URL da imagem" value="' . $imagem['IMAGEM_URL'] . '">';
-                        echo '<input type="number" name="imagem_ordem[]" placeholder="Ordem" min="1" value="' . $imagem['IMAGEM_ORDEM'] . '">';
-                        echo '</div>';
-                    }
-                    ?>
-
-                    <button onclick="adicionarImagem()" class="add_img">Adicionar imagem</button>
-                    <input type="submit" value="Atualizar">
+            <div class="sub-header">
+                <h2>Editar os produto</h2>
             </div>
 
-            <?php
-            if (isset($_GET['sucesso'])) { //suceeso é um parâmetro que é passado na URL
-                echo '<p class="msg-sucesso">Produto cadastrado com sucesso!</p>';
-            }
-            ?>
+            <!-- Contêiner principal do formulário -->
+            <div class="form-container">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="nomeProduto">
+                        <label for="nome">Nome do produto:</label>
+                        <input type="text" id="nome" name="nome" value="<?php echo $produto['PRODUTO_NOME']; ?>">
+                    </div>
+
+                    <div class="categoria">
+                        <label for="categoria_id">Categoria do produto:</label>
+                        <select name="categoria_id" id="categoria_id" value="<?php echo $produto['CATEGORIA_ID']; ?>">
+                            <?php
+                            include '../../php/categoria/listar_ativos.php';
+
+                            if (!isset($categorias)) {
+                                echo "<option>Nenhuma categoria cadastrada</option>";
+                            } else {
+                                echo "<option value=".$produto['CATEGORIA_ID'].">". $produto['CATEGORIA_NOME'] . "</option>";
+                                foreach ($categorias as $categoria) : ?>
+                                    <option value="<?php echo $categoria['CATEGORIA_ID']; ?>"><?php echo $categoria['CATEGORIA_NOME']; ?></option>
+
+                            <?php
+                                endforeach;
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="descricao">
+                        <label for="descricao">Descrição do produto:</label>
+                        <textarea type="text" id="descricao" name="descricao" placeholder="Digite uma descrição"><?= $produto['PRODUTO_DESC']; ?></textarea>
+                    </div>
+                    <div class="price-row">
+
+                        <div class="preco">
+                            <label for="preco">Preço do produto:</label>
+                            <input type="number" id="preco" name="preco" step="0.1" min="0" placeholder="Exe: 110.25" value="<?php echo $produto['PRODUTO_PRECO']; ?>">
+                        </div>
+                        <div class="desconto">
+                            <label for="desconto">Desconto do produto:</label>
+                            <input type="number" id="desconto" name="desconto" step="1" min="0" max="100" placeholder="0 - 100" value="<?php echo $produto['PRODUTO_DESCONTO']; ?>">
+                        </div>
+                        <div class="quantidade">
+                            <label for="produto_qtd">Quantidade em estoque:</label>
+                            <input type="number" id="produto_qtd" name="produto_qtd" step="1" min="0" placeholder="Digite o numero de itens" value="<?php echo $produto['PRODUTO_QTD']; ?>">
+                        </div>
+                        <div class="ativo">
+                            <label for="ativo">Produto ativo:</label>
+                            <input type="checkbox" id="ativo" name="ativo" value="1" <?php echo $produto['PRODUTO_ATIVO'] ? 'checked' : ''; ?>>
+                        </div>
+                    </div>
+
+                    <?php
+                    foreach ($imagens_produto as $imagem) :
+                    ?>
+                        <div id="containerImagens">
+                            <div class="imagem-input">
+                                <div class="url">
+                                    <label for="url">URL da imagem:</label>
+                                    <input type="text" id="url" name="imagem_url[]" placeholder="URL da imagem" value=" <?= $imagem['IMAGEM_URL'] ?>">
+                                </div>
+
+                                <div class="ordem">
+                                    <label for="ordem">Ordem:</label>
+                                    <input type="number" id="ordem" name="imagem_ordem[]" placeholder="Ordem" min="1" value="<?= $imagem['IMAGEM_ORDEM'] ?>">
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    endforeach;
+                    ?>
+
+                    <input type="submit" value="Atualizar">
+                </form>
+            </div>
             </form>
             </div>
         </section>
