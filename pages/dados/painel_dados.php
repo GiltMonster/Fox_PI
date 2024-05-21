@@ -44,25 +44,30 @@ if (isset($_GET['logout'])) {
                     </a>
                 </div>
 
+                <?php
+                require_once '../../php/config/conexao.php';
+                include '../../php/data/loadDados.php';
+
+                ?>
                 <div class="container-dados">
                     <div class="dados-numeros">
                         <h3>Qtd. dos produtos cadastrados:</h3>
-                        <label class="dados">120</label>
+                        <label class="dados"><?= $qtd_produtos ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total em produtos <label style="color: #5BC452;">ATIVOS</label>:</h3>
-                        <label class="dados">107</label>
+                        <label class="dados"><?= $qtd_produtos_ativos ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de produtos <label style="color: #C45252;">DESATIVADOS</label>:</h3>
-                        <label class="dados">13</label>
+                        <label class="dados"><?= $qtd_produtos_desativados ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de produtos em estoque:</h3>
-                        <label class="dados">2000</label>
+                        <label class="dados"><?= $total_produtos_estoque ?></label>
                     </div>
 
                 </div>
@@ -80,28 +85,32 @@ if (isset($_GET['logout'])) {
                 <div class="container-dados">
                     <div class="dados-numeros">
                         <h3>Qtd das categorias cadastradas:</h3>
-                        <label class="dados">120</label>
+                        <label class="dados"><?= $qtd_categorias ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de categorias <label style="color: #5BC452;">ATIVOS</label>:</h3>
-                        <label class="dados">107</label>
+                        <label class="dados"><?= $qtd_categorias_ativas ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de categorias <label style="color: #C45252;">DESATIVADOS</label>:</h3>
-                        <label class="dados">13</label>
+                        <label class="dados"><?= $qtd_categorias_desativadas ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Categorias mais usadas:</h3>
-                        <label class="dados">2000</label>
+                        <ul>
+                            <?php foreach ($categorias_mais_usadas as $categoria) : ?>
+                                <li><?= $categoria['CATEGORIA_NOME']?> - <strong style="color: black;"><?= $categoria['COUNT(PRODUTO.PRODUTO_ID)']?></strong> </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
 
                 </div>
             </div>
 
-            <div class="dados-produtos">
+            <div class="dados-produtos bottom">
                 <div class="title-header">
                     <h2>Dados das vendas:</h2>
 
