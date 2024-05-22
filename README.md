@@ -23,7 +23,7 @@ Nesse projeto, foquei a utilização de HTML5 E CSS3 puros, sem nenhuma bibliote
 | ----------------- | ---------------------------------------------------------------- |
 | Cor principal 01 | ![#43ADDA](https://via.placeholder.com/10/43ADDA?text=+) #43ADDA |
 | Cor principal 02 | ![#F9A80C](https://via.placeholder.com/10/F9A80C?text=+) #F9A80C |
-| Cor principal 02 | ![#000000](https://via.placeholder.com/10/000000?text=+) #000000 |
+| Cor principal 03 | ![#000000](https://via.placeholder.com/10/000000?text=+) #000000 |
 
 ## Funcionalidades
 
