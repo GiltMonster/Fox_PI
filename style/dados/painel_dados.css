@@ -1,0 +1,84 @@
+.title-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #cecece;
+  margin: 30px 0 20px 0;
+}
+
+.btn-carregar {
+  text-decoration: none;
+  background-color: #f9a80c;
+  color: #000000;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btn-carregar:hover {
+  background-color: #3cc5ff;
+  color: #ffffff;
+}
+
+.container-dados {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dados-numeros {
+  background-color: #f4f4f4;
+  border: 1px solid #3cc5ff;
+  border-radius: 10px;
+  padding: 0 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.dados-numeros h3 {
+  font-size: 0.9rem;
+}
+
+.dados {
+  color: #3cc5ff;
+  font-size: 5rem;
+  padding: 20px;
+}
+
+.dados-erro {
+  color: #ff3c3c;
+  font-size: 2.5rem;
+  padding: 17% 0;
+}
+
+.dados-erro-cat {
+  color: #ff3c3c;
+  font-size: 2rem;
+  padding: 19% 0;
+}
+
+.dados-cifrao {
+  color: #3cc5ff;
+  font-size: 2.5rem;
+  padding: 17% 0;
+}
+
+ul {
+  padding: 20px;
+  margin: 0;
+}
+
+li {
+  color: #3cc5ff;
+}
+
+.bottom {
+  margin-bottom: 100px;
+}

@@ -9,9 +9,10 @@ session_destroy();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Login</title>
     <link rel="stylesheet" href="../../style/login/login.css">
     <link rel="stylesheet" href="../../style/alerts.css">
+    <link rel="icon" href="../../favicon.ico" />
+    <title>Login</title>
 </head>
 
 <body>
@@ -44,7 +45,7 @@ session_destroy();
 
             if (isset($_GET['ativo'])) {
                 echo '
-                <div class="alert warning">
+                <div class="alert alert-warning">
                     <span class="closebtn">&times;</span>  
                     <strong>Aviso!</strong> Entre em contato com o administrador para ativar sua conta.
                 </div>

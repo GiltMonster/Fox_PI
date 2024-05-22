@@ -1,12 +1,12 @@
 <?php
     session_start(); //inicia a sessão
+    if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
+        header('Location:login.php'); //redireciona para a página login.php
+        exit(); //finaliza a execução do script
+    }
 
     require_once('../../php/config/conexao.php'); //inclui o arquivo de conexão
 
-    // if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
-    //     header('Location:login.php'); //redireciona para a página login.php
-    //     exit(); //finaliza a execução do script
-    // }
 
     try{
         $stmt = $pdo->prepare("SELECT * FROM CATEGORIA");
@@ -30,6 +30,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../style/index.css">
+        <link rel="icon" href="../../favicon.ico" />
     <title>listar Categoria</title>
 </head>
 

@@ -1,88 +1,70 @@
 <?php
-session_start(); //inicia a sessão
-require_once('../../php/config/conexao.php'); //inclui os métodos de conexão do arquivo conexao.php
-
-// if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logado
-//     header('Location:login.php'); //redireciona para a página login.php
-//     exit(); //finaliza a execução do script
-// }
-
-//se a pagina foi acessada via GET e o adm_id foi informado por path param na URL 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $categoria_id = $_GET['categoria_id']; //recebe o adm_id do adm
-    if (empty($categoria_id)) { //se o adm_id estiver vazio
-        echo "<p style='color:red;'>categoria_id da categoria não informado!</p>"; //mensagem de erro
-        exit(); //finaliza a execução do script
-    } else {
-        try {
-            $stmt = $pdo->prepare("SELECT * FROM CATEGORIA WHERE CATEGORIA_ID = :categoria_id"); //consulta SQL
-            $stmt->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT); //substitui o parâmetro :adm_id pelo valor da variável $adm_id
-            $stmt->execute(); //executa a consulta SQL
-            if ($stmt->rowCount() > 0) { //se retornar algum registro
-                $categoria = $stmt->fetch(PDO::FETCH_ASSOC); //retorna um array associativo com os registros
-                //echo var_dump($administrador); informa o tipo e os valors dos campos a serem trabalhados
-            } else {
-                echo "<p style='color:red;'>Categoria não encontrada!</p>"; //mensagem de erro
-                exit(); //finaliza a execução do script
-            }
-        } catch (PDOException $e) {
-            echo "<p style='color:red;'>Erro ao buscar categoria: " . $e->getMessage() . "</p>"; //mensagem de erro
-        }
-    }
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: ../login/login.php');
+    exit();
 }
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
-    $categoria_id = $_POST['categoria_id']; //recebe o categoria_id da categoria
-    $nome_categoria = $_POST['nome_categoria'];
-    $descricao_categoria = $_POST['descricao_categoria'];
-    $categoria_ativo = isset($_POST['categoria_ativo']) ? 1 : 0;
-
-    try {
-        $stmt = $pdo->prepare("UPDATE CATEGORIA SET CATEGORIA_NOME = :nome_categoria, CATEGORIA_DESC = :descricao_categoria, CATEGORIA_ATIVO = :categoria_ativo WHERE CATEGORIA_ID = :categoria_id");
-        $stmt->bindParam(':nome_categoria', $nome_categoria, PDO::PARAM_STR);
-        $stmt->bindParam(':descricao_categoria', $descricao_categoria, PDO::PARAM_STR);
-        $stmt->bindParam(':categoria_ativo', $categoria_ativo, PDO::PARAM_INT);
-        $stmt->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
-        $stmt->execute();
-        header('Location:listar_categoria.php');
-        exit();
-    } catch (PDOException $e) {
-        echo "<p style='color:red;'>Erro ao atualizar a categoria: " . $e->getMessage() . "</p>";
-    }
-}
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style/index.css">
+    <link rel="stylesheet" href="../../style/categoria/formulario_categoria.css">
+    <link rel="icon" href="../../favicon.ico" />
     <title>Editar Categoria</title>
 </head>
+<?php
+require_once '../../php/config/conexao.php';
+include '../../php/categoria/editar_categoria.php';
+?>
 
 <body>
-    <h2>Editar Categoria</h2>
-    <form action="./editar_categoria.php" method="POST" enctype="multipart/form-data">
-        <input type='hidden' id="categoria_id" name='categoria_id' value="<?php echo $categoria['CATEGORIA_ID']; ?>" />
-        <label for="nome_categoria">Nome da categoria: </label>
-        <input type="text" id="nome_categoria" name="nome_categoria" value="<?php echo $categoria['CATEGORIA_NOME']; ?>" required>
-        <p></p>
-        <label for="descricao_categoria">Descrição Categoria: </label>
-        <input type="text" id="descricao_categoria" name="descricao_categoria" value="<?php echo $categoria['CATEGORIA_DESC']; ?>" required>
-        <p></p>
-        <label for="ativo">Ativo</label>
-        <input type="checkbox" id="categoria_ativo" name="categoria_ativo" value="1" <?php echo $categoria['CATEGORIA_ATIVO'] ? 'checked' : '' ;?>>
-        <p></p>
-        <input type="submit" value="Cadastrar">
-    </form>
-    <a href="listar_categoria.php">Voltar a lista de Categorias</a>
+    <header class="navbar">
+        <div>
+            <img src="../../images/fox.svg" alt="fox logo" />
+            <nav>
+                <ul>
+                    <li><a href="../../index.php">Home</a></li>
+                    <li><a href="../../pages/admin/painel_admin.php">Administradores</a></li>
+                    <li><a href="../../pages/produto/painel_produtos.php">Produtos</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a class="btn-sair" href="./painel_categoria.php?logout">Sair</a>
+    </header>
 
-
+    <main>
+        <section class="container">
+            <div class="sub-header">
+                <h2>Editar categoria</h2>
+            </div>
+            <div class="container-form">
+                <form action="./editar_categoria.php" method="POST" enctype="multipart/form-data">
+                    <div class="campos">
+                        <input type='hidden' id="categoria_id" name='categoria_id' value="<?php echo $categoria['CATEGORIA_ID']; ?>" />
+                        <label for="nome_categoria">Nome :</label>
+                        <input type="text" id="nome_categoria" name="nome_categoria" value="<?php echo $categoria['CATEGORIA_NOME']; ?>" required>
+                    </div>
+                    <div class="campos-text">
+                        <label for="descricao_categoria">Descrição :</label>
+                        <textarea type="text" id="descricao_categoria" name="descricao_categoria" required><?php echo $categoria['CATEGORIA_DESC']; ?></textarea>
+                    </div>
+                    <div class="campos">
+                        <label for="categoria_ativo">Ativo :</label>
+                        <input type="checkbox" id="categoria_ativo" name="categoria_ativo" value="1" <?php echo $categoria['CATEGORIA_ATIVO'] ? 'checked' : ''; ?>>
+                    </div>
+                    <div class="btn-group">
+                        <input class="btn-salvar" type="submit" value="Salvar" />
+                        <a class="btn-cancelar" href="./painel_categoria.php">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    
 </body>
 
 </html>
-
-

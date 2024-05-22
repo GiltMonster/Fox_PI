@@ -17,6 +17,7 @@ if (isset($_GET['logout'])) {
     <link rel="stylesheet" href="../../style/produto/painel_produto.css">
     <link rel="stylesheet" href="../../style/carrossel.css">
     <link rel="stylesheet" href="../../style/alerts.css">
+    <link rel="icon" href="../../favicon.ico" />
     <title>Painel de Produtos</title>
 </head>
 
@@ -42,7 +43,7 @@ if (isset($_GET['logout'])) {
                 <h2>Estoque</h2>
 
                 <form method="POST" class="pesquisa-form">
-                    <input type="text" placeholder="Buscar produto" name="produto_nome" required/>
+                    <input type="text" placeholder="Buscar produto" name="produto_nome" required />
                     <button type="submit">
                         <img src="../../images/icons/search.svg" alt="search">
                     </button>
@@ -57,6 +58,51 @@ if (isset($_GET['logout'])) {
             </div>
 
             <?php
+
+            if (isset($_GET['sucesso'])) {
+                echo '<div class="alert alert-success">
+                <span class="closebtn">&times;</span>  
+                <strong>Sucesso!</strong> Produto cadastrado com sucesso.
+            </div>';
+            } else if (isset($_GET['erro'])) {
+                echo '<div class="alert alert-danger">
+                <span class="closebtn">&times;</span>  
+                <strong>Erro!</strong> Não foi possível cadastrar o produto.
+            </div>';
+            } else if (isset($_GET['excluido'])) {
+                echo '<div class="alert alert-success">
+                <span class="closebtn">&times;</span>  
+                <strong>Sucesso!</strong> produto excluído com sucesso.
+            </div>';
+            } else if (isset($_GET['erro_excluir'])) {
+                echo '<div class="alert alert-danger">
+                <span class="closebtn">&times;</span>  
+                <strong>Erro!</strong> Não foi possível excluir o produto.
+            </div>';
+            } else if (isset($_GET['editado'])) {
+                echo '<div class="alert alert-info">
+                <span class="closebtn">&times;</span>  
+                <strong>Sucesso!</strong> produto editado com sucesso.
+            </div>';
+            } else if (isset($_GET['erro_editar'])) {
+                echo '<div class="alert alert-danger">
+                <span class="closebtn">&times;</span>  
+                <strong>Erro!</strong> Não foi possível editar o produto.
+              </div>';
+            } else if (isset($_GET['erro_pesquisar'])) {
+                echo '<div class="alert alert-danger">
+                <span class="closebtn">&times;</span>  
+                <strong>Erro!</strong> Não foi possível pesquisar o produto.
+            </div>';
+            } elseif (isset($_GET['op_excluir'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Operação de exclusão em desenvolvimento.
+                </div>
+                ';
+            }
+
             require_once('../../php/config/conexao.php');
 
 
@@ -111,7 +157,7 @@ if (isset($_GET['logout'])) {
                         </div>
                         <div class="card-buttons">
                             <a class="btn-alterar" href="./editar_produto.php?produto_id=<?= $produto['PRODUTO_ID'] ?>">Alterar</a>
-                            <a class="btn-excluir">Excluir</a>
+                            <a class="btn-excluir" href="./painel_produtos.php?op_excluir">Excluir</a>
                         </div>
                     </div>
                     <?php endforeach;
@@ -196,5 +242,6 @@ if (isset($_GET['logout'])) {
 </body>
 
 <script src="../../js/carrossel.js"> </script>
+<script src="../../js/alerts.js"></script>
 
 </html>

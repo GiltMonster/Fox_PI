@@ -114,8 +114,7 @@ body {
 
 .container-buttons {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   margin: 20px;
 }
 
@@ -136,7 +135,7 @@ body {
 }
 
 .btn-produto label {
-  font-size: 0.9em;
+  font-size: 1.5em;
   cursor: pointer;
   padding: 0 0 0 10px;
 }

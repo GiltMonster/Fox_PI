@@ -14,14 +14,15 @@ if (isset($_GET['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/admin/painel_admin.css">
     <link rel="stylesheet" href="../../style/index.css">
-    <link rel="stylesheet" href="../../style/alerts.css" >
+    <link rel="stylesheet" href="../../style/alerts.css">
+    <link rel="icon" href="../../favicon.ico" />
     <title>Painel administrador</title>
 </head>
 
 <body>
     <header class="navbar">
         <div>
-            <img src="../../images/fox.svg" alt="fox logo"/>
+            <img src="../../images/fox.svg" alt="fox logo" />
             <nav>
                 <ul>
                     <li><a href="../../index.php">Home</a></li>
@@ -33,7 +34,7 @@ if (isset($_GET['logout'])) {
 
         <a class="btn-sair" href="./painel_admin.php?logout">Sair</a>
     </header>
-    
+
     <main>
         <section class="container">
 
@@ -49,20 +50,64 @@ if (isset($_GET['logout'])) {
 
                 </form>
                 <a class="btn-admin" href="../../pages/admin/cadastrar_administrador.php">
-                    <!-- <svg class="feather feather-user-plus" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                        <circle cx="8.5" cy="7" r="4" />
-                        <line x1="20" x2="20" y1="8" y2="14" />
-                        <line x1="23" x2="17" y1="11" y2="11" />
-                    </svg> -->
                     <label>
                         Cadastrar administrador
                     </label>
                 </a>
 
             </div>
-
             <?php
+            if (isset($_GET['sucesso'])) {
+                echo '
+                <div class="alert alert-success">
+                    <span class="closebtn">&times;</span>
+                    <strong>Sucesso!</strong> Administrador cadastrado com sucesso.
+                </div>
+                ';
+            } elseif (isset($_GET['excluido'])) {
+                echo '
+                <div class="alert alert-success">
+                    <span class="closebtn">&times;</span>
+                    Sucesso administrador <strong>excluído</strong> com sucesso.
+                </div>
+                ';
+            } elseif (isset($_GET['erro'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Ocorreu um erro ao excluir o administrador.
+                </div>
+                    ';
+            } elseif (isset($_GET['editado'])) {
+                echo '
+                <div class="alert alert-info">
+                    <span class="closebtn">&times;</span>
+                    <strong>Sucesso!</strong> Administrador editado com sucesso.
+                </div>
+                ';
+            } elseif (isset($_GET['erro_editar'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Ocorreu um erro ao editar o administrador.
+                </div>
+                ';
+            }elseif (isset($_GET['erro_pesquisa'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Ocorreu um erro ao pesquisar o administrador.
+                </div>
+                ';
+            }elseif (isset($_GET['op_excluir'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Operação de exclusão em desenvolvimento.
+                </div>
+                ';
+            }
+
             require_once('../../php/config/conexao.php');
 
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -85,12 +130,12 @@ if (isset($_GET['logout'])) {
                         echo "<td>" . $adm['ADM_EMAIL'] . "</td>";
                         echo "<td>" . $adm['ADM_NOME'] . "</td>";
                         echo "<td>" . $adm['ADM_SENHA'] . "</td>";
-                        echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<p style="color:red;">Inativo</p>') . "</td>";
+                        echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<label style="color:red;">Inativo</label>') . "</td>";
                         echo "<td>
                         <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
                             <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
                         </a>
-                        <a href='../../php/admin/excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>
+                        <a href='./painel_admin.php?op_excluir'>
                             <img class='excluir' src='../../images/icons/excluir.svg' alt='excluir'/>
                         </a>
                         </td>";
@@ -123,12 +168,12 @@ if (isset($_GET['logout'])) {
                         echo "<td>" . $adm['ADM_EMAIL'] . "</td>";
                         echo "<td>" . $adm['ADM_NOME'] . "</td>";
                         echo "<td>" . $adm['ADM_SENHA'] . "</td>";
-                        echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<p style="color:red;">Inativo</p>') . "</td>";
+                        echo "<td>" . ($adm['ADM_ATIVO']  == 1 ? '<label style="color:green;">Ativo</label>' : '<label style="color:red;">Inativo</label>') . "</td>";
                         echo "<td>
                         <a href='./editar_admin.php?adm_id=" . $adm['ADM_ID'] . "'>
                             <img class='editar' src='../../images/icons/editar.svg' alt='editar'/>
                         </a>
-                        <a href='../../php/admin/excluir_administrador.php?id=" . $adm['ADM_ID'] . "'>
+                        <a href='./painel_admin.php?op_excluir'>
                             <img class='excluir' src='../../images/icons/excluir.svg' alt='excluir'/>
                         </a>
                         </td>";
@@ -154,5 +199,6 @@ if (isset($_GET['logout'])) {
         </section>
     </main>
 </body>
+<script src="../../js/alerts.js"></script>
 
 </html>
