@@ -52,15 +52,33 @@
   padding: 20px;
 }
 
+.dados-erro {
+  color: #ff3c3c;
+  font-size: 2.5rem;
+  padding: 17% 0;
+}
+
+.dados-erro-cat {
+  color: #ff3c3c;
+  font-size: 2rem;
+  padding: 19% 0;
+}
+
+.dados-cifrao {
+  color: #3cc5ff;
+  font-size: 2.5rem;
+  padding: 17% 0;
+}
+
 ul {
-  padding:  20px;
+  padding: 20px;
   margin: 0;
 }
 
-li{
+li {
   color: #3cc5ff;
 }
 
-.bottom{
+.bottom {
   margin-bottom: 100px;
 }

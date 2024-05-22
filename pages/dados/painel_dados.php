@@ -39,7 +39,7 @@ if (isset($_GET['logout'])) {
                 <div class="title-header">
                     <h2>Dados dos produtos:</h2>
 
-                    <a class="btn-carregar" href="../../pages/produto/CadastrarProdutos.php">
+                    <a class="btn-carregar" href="../../pages/dados/painel_dados.php">
                         Recarregar os dados
                     </a>
                 </div>
@@ -77,7 +77,7 @@ if (isset($_GET['logout'])) {
                 <div class="title-header">
                     <h2>Dados das Categorias:</h2>
 
-                    <a class="btn-carregar" href="../../pages/produto/CadastrarProdutos.php">
+                    <a class="btn-carregar" href="../../pages/dados/painel_dados.php">
                         Recarregar os dados
                     </a>
                 </div>
@@ -100,10 +100,19 @@ if (isset($_GET['logout'])) {
 
                     <div class="dados-numeros">
                         <h3>Categorias mais usadas:</h3>
-                        <ul>
-                            <?php foreach ($categorias_mais_usadas as $categoria) : ?>
-                                <li><?= $categoria['CATEGORIA_NOME']?> - <strong style="color: black;"><?= $categoria['COUNT(PRODUTO.PRODUTO_ID)']?></strong> </li>
-                            <?php endforeach; ?>
+                        <?php
+                        if (empty($categorias_mais_usadas)) {
+                            echo '<label class="dados-erro-cat">Sem categorias!</label>';
+                        } else {
+                            echo "<ul>";
+                            foreach ($categorias_mais_usadas as $categoria) :
+                        ?>
+                                <li><?= $categoria['CATEGORIA_NOME'] ?> - <strong style="color: #f9a80c;"><?= $categoria['COUNT(PRODUTO.PRODUTO_ID)'] ?> qtd.</strong> </li>
+                        <?php
+                            endforeach;
+                        }
+                        echo "</ul>";
+                        ?>
                         </ul>
                     </div>
 
@@ -114,7 +123,7 @@ if (isset($_GET['logout'])) {
                 <div class="title-header">
                     <h2>Dados das vendas:</h2>
 
-                    <a class="btn-carregar" href="../../pages/produto/CadastrarProdutos.php">
+                    <a class="btn-carregar" href="../../pages/dados/painel_dados.php">
                         Recarregar os dados
                     </a>
                 </div>
@@ -122,22 +131,32 @@ if (isset($_GET['logout'])) {
                 <div class="container-dados">
                     <div class="dados-numeros">
                         <h3>Total de vendas:</h3>
-                        <label class="dados">120</label>
+                        <label class="dados"><?= $qtd_vendas ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de valor no estoque:</h3>
-                        <label class="dados">107</label>
+                        <label class="dados-cifrao"><?= $total_valor_estoque ?></label>
                     </div>
 
                     <div class="dados-numeros">
-                        <h3>Vendas mensais:</h3>
-                        <label class="dados">13</label>
+                        <h3>Total em valor das vendas:</h3>
+                        <label class="dados-cifrao"><?= $total_vendas ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Produtos mais vendidos:</h3>
-                        <label class="dados">2000</label>
+                        <?php
+                        if (empty($produtos_mais_vendidos)) {
+                            echo '<label class="dados-erro">Sem vendas!</label>';
+                        } else {
+                            echo "<ul>";
+                            foreach ($produtos_mais_vendidos as $produto) :
+                        ?>
+                                <li><?= reduzirString($produto['PRODUTO_NOME']) ?> - <strong style="color: #f9a80c;"><?= $produto['ITEM_QTD'] ?> qtd.</strong> </li>
+                        <?php endforeach;
+                            echo "</ul>";
+                        } ?>
                     </div>
 
                 </div>
