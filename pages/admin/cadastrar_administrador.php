@@ -14,9 +14,10 @@ if (isset($_GET['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Administrador</title>
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/admin/cadastro_admin.css">
+    <link rel="icon" href="../../favicon.ico" />
+    <title>Cadastro de Administrador</title>
 </head>
 
 <body>

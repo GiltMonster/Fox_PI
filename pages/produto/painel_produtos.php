@@ -17,6 +17,7 @@ if (isset($_GET['logout'])) {
     <link rel="stylesheet" href="../../style/produto/painel_produto.css">
     <link rel="stylesheet" href="../../style/carrossel.css">
     <link rel="stylesheet" href="../../style/alerts.css">
+    <link rel="icon" href="../../favicon.ico" />
     <title>Painel de Produtos</title>
 </head>
 
@@ -93,6 +94,13 @@ if (isset($_GET['logout'])) {
                 <span class="closebtn">&times;</span>  
                 <strong>Erro!</strong> Não foi possível pesquisar o produto.
             </div>';
+            } elseif (isset($_GET['op_excluir'])) {
+                echo '
+                <div class="alert alert-danger">
+                    <span class="closebtn">&times;</span>
+                    <strong>Erro!</strong> Operação de exclusão em desenvolvimento.
+                </div>
+                ';
             }
 
             require_once('../../php/config/conexao.php');
@@ -149,7 +157,7 @@ if (isset($_GET['logout'])) {
                         </div>
                         <div class="card-buttons">
                             <a class="btn-alterar" href="./editar_produto.php?produto_id=<?= $produto['PRODUTO_ID'] ?>">Alterar</a>
-                            <a class="btn-excluir">Excluir</a>
+                            <a class="btn-excluir" href="./painel_produtos.php?op_excluir">Excluir</a>
                         </div>
                     </div>
                     <?php endforeach;

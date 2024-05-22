@@ -9,9 +9,10 @@ session_destroy();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Login</title>
     <link rel="stylesheet" href="../../style/login/login.css">
     <link rel="stylesheet" href="../../style/alerts.css">
+    <link rel="icon" href="../../favicon.ico" />
+    <title>Login</title>
 </head>
 
 <body>

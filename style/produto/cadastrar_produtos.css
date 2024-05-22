@@ -1,78 +1,201 @@
-.form-container{
-    display: flex;
-    justify-content: center;
-    background-color: #f3f3f3;
-    width: 40%;
-    margin: 0 auto;
-    border: 2px solid #dcdcdc;
-    border-radius: 15px;
-    box-shadow: 0 0 10px #9f9f9f ;
+/* Estilos para o formulário */
+.form-container {
+    display: grid; /* Define um contêiner de grid */
+    grid-template-columns: repeat(2, 1fr); /* Cria duas colunas iguais */
+    gap: 20px; /* Define o espaçamento entre os itens */
 }
 
-form{
+.form-container form {
+    display: contents; /* Mantém o conteúdo sem adicionar um novo nível de caixa */
+}
+
+/* Estilos para campos de texto e textarea */
+.form-container label {
+    font-weight: bold; /* Define a fonte em negrito */
+    margin-bottom: 5px; /* Define a margem inferior */
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container textarea,
+.form-container select {
+    width: 100%; /* Define a largura */
+    padding: 10px; /* Define o preenchimento */
+    margin-bottom: 10px; /* Define a margem inferior */
+    border: 1px solid #ccc; /* Define a borda */
+    border-radius: 4px; /* Arredonda os cantos */
+    box-sizing: border-box; /* Inclui preenchimento e borda na largura total */
+}
+
+/* Estilos específicos para checkbox */
+.form-container .ativo {
+    display: flex; /* Define um contêiner flexível */
+    align-items: center; /* Alinha os itens ao centro */
+}
+
+.form-container .ativo input {
+    margin-left: 10px; /* Define a margem esquerda */
+}
+
+/* Estilos para contêiner de imagens */
+#containerImagens {
+    display: flex; /* Define um contêiner flexível */
+    gap: 5px; /* Define o espaçamento entre os itens */
+    grid-column: 1 / -1; /* Ocupa toda a largura da grid */
+    flex-direction: column;
+}
+
+#containerImagens .imagem-input {
+    display: flex; /* Define um contêiner flexível */
+    align-items: center;
+    gap: 10px; /* Define o espaçamento entre os itens */
+}
+
+
+/* Estilos para botões */
+.form-container input[type="submit"],
+.form-container button {
+    padding: 10px 20px; /* Define o preenchimento */
+    border: none; /* Remove a borda */
+    border-radius: 5px; /* Arredonda os cantos */
+    cursor: pointer; /* Define o cursor como pointer */
+    font-size: 16px; /* Define o tamanho da fonte */
+}
+
+/* Estilo para o botão de submit */
+.form-container input[type="submit"] {
+    background-color: #007bff; /* Define a cor de fundo */
+    color: white; /* Define a cor do texto */
+    grid-column: span 2;
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #0056b3; /* Define a cor de fundo ao passar o mouse */
+}
+
+/* Estilo para o botão de cancelar */
+.form-container button {
+    background-color: #dc3545; /* Define a cor de fundo */
+    color: white; /* Define a cor do texto */
+    height: 100%;
+}
+
+.form-container button:hover {
+    background-color: #c82333; /* Define a cor de fundo ao passar o mouse */
+}
+
+/* Estilos para mensagem de sucesso */
+.msg-sucesso {
+    color: green; /* Define a cor do texto */
+    font-weight: bold; /* Define a fonte em negrito */
+    margin-top: 20px; /* Define a margem superior */
+}
+
+/* Estilos específicos para a estrutura do formulário */
+.nomeProduto,
+.categoria {
+    grid-column: span 1; /* Define a coluna que ocupa */
+}
+
+.descricao {
+    grid-column: span 2; /* Define a coluna que ocupa */
+}
+
+/* Adicionando a classe price-row */
+.price-row {
+    display: flex; /* Define um contêiner flexível */
+    gap: 20px; /* Define o espaçamento entre os itens */
+    width: 100%; /* Define a largura */
+    align-items: center; /* Alinha os itens ao centro */
+    grid-column: span 2;
+}
+
+.price-row div {
+    flex: 1; /* Faz com que o div cresça para ocupar o espaço disponível */
+    display: flex; /* Define um contêiner flexível */
+    flex-direction: column; /* Define a direção dos itens em coluna */
+}
+
+/* Adicionando a classe flex-container para alinhar label e input */
+.flex-container {
+    display: flex; /* Define um contêiner flexível */
+    align-items: center; /* Alinha os itens ao centro */
+}
+
+.flex-container label {
+    width: 150px; /* Define a largura do label */
+    margin-right: 10px; /* Define a margem direita */
+}
+
+.flex-container input {
+    flex: 1; /* Faz com que o input cresça para ocupar o espaço disponível */
+}
+
+
+
+/* Estilo para o botão de adicionar imagem */
+.add-image-button {
+    display: flex; /* Define um contêiner flexível */
+    justify-content: flex-end; /* Alinha o botão à direita */
+    grid-column: span 2; /* Define a coluna que ocupa */
+    position: absolute; /* Define o posicionamento absoluto */
+    bottom: 80px; /* Define a distância do fundo para posicionar acima dos botões de salvar e cancelar */
+    right: 20px; /* Define a distância da direita */
+}
+
+.add-image-button button {
+    background-color: #28a745; /* Define a cor de fundo */
+    color: white; /* Define a cor do texto */
+}
+
+.add-image-button button:hover {
+    background-color: #218838; /* Define a cor de fundo ao passar o mouse */
+}
+
+.form-container .actions input[type="submit"],
+.form-container .actions button {
+    width: 100px; /* Define a largura */
+    margin-top: 0; /* Remove a margem superior */
+}
+
+.actions{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.cancel{
+    background-color: #dc3545; /* Define a cor de fundo */
+    color: white; /* Define a cor do texto */
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.cancel:hover{
+    background-color: #c82333; /* Define a cor de fundo ao passar o mouse */
+}
+
+.url{
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
-}
-
-form label{
-    margin-bottom: 5px;
-    font-size: 1rem;
-}
-
-form input{
-    margin-bottom: 1rem;
-    padding: 10px;
-    width: 300px;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-}
-
-form [type="text"]{
-    padding: 10px;
-    width: 300px;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-}
-
-form [type="file"]{
-    padding: 10px;
-    width: 300px;
-    cursor: pointer;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-
-}
-
-form [type="submit"]{
-    padding: 10px;
     width: 100%;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-    background-color: #4c00ff;
-    color: white;
-    cursor: pointer;
+    gap: 10px;
 }
 
-form [type="submit"]:hover{
-    background-color: #3a00cc;
-}
-
-.add_img{
-    padding: 10px;
+.url input[type="text"]{
     width: 100%;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-    background-color: #4c00ff;
-    color: white;
-    cursor: pointer;
 }
 
-.add_img:hover{
-    background-color: #3a00cc;
+.ordem{
+    display: flex;
+    flex-direction: column;
 }
 
-.msg-sucesso{
-    color: green;
-    text-align: center;
+.ordem input[type="number"]{
+    width: 100%;
+    margin: 0;
 }
