@@ -39,12 +39,12 @@ Vá até a pasta do XAMMP > `htdocs`:
 
 _Mac_:
 ```bash
-  cd ../../Applications/XAMPP/htdocs  
+  cd ../../Applications/XAMPP/htdocs/Fox_PI/  
 ```
 
 _Windows_ :
 ```bash
-  cd ../../Applications/XAMPP/htdocs  
+  cd ../../xampp/htdocs/Fox_PI/  
 ```
 
 Clone o projeto.

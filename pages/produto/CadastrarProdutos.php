@@ -14,6 +14,7 @@ if (isset($_GET['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/produto/cadastrar_produtos.css">
+    <link rel="icon" href="../../favicon.ico" />
     <title>Cadastrar produtos</title>
 </head>
 
