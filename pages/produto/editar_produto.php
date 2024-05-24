@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         <div class="preco">
                             <label for="preco">Preço do produto:</label>
-                            <input type="number" id="preco" name="preco" step="0.1" min="0" placeholder="Exe: 110.25" value="<?php echo $produto['PRODUTO_PRECO']; ?>">
+                            <input type="number" id="preco" name="preco" step="0.01" min="0" placeholder="Exe: 110.25" value="<?php echo $produto['PRODUTO_PRECO']; ?>">
                         </div>
                         <div class="desconto">
                             <label for="desconto">Desconto do produto:</label>

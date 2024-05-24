@@ -81,7 +81,7 @@ if (isset($_GET['logout'])) {
                     <div class="price-row">
                         <div class="preco">
                             <label for="preco">Preço do produto:</label>
-                            <input type="number" id="preco" name="preco" required step="0.1" min="0" placeholder="Exe: 110.25">
+                            <input type="number" id="preco" name="preco" required step="0.01" min="0" placeholder="Exe: 110.25">
                         </div>
                         <div class="desconto">
                             <label for="desconto">Desconto do produto:</label>
