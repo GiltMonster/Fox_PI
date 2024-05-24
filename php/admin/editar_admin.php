@@ -37,6 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //se o formulário foi submetido
     $adm_senha = $_POST['adm_senha']; // recebe senha
     $adm_ativo = isset($_POST['adm_ativo']) ? 1 : 0; //recebe informação se esta ativo
 
+    $adm_senha = password_hash($adm_senha, PASSWORD_DEFAULT);
+
     try {
         $stmt = $pdo->prepare("UPDATE ADMINISTRADOR SET ADM_NOME = :adm_nome, ADM_EMAIL = :adm_email, ADM_SENHA = :adm_senha, ADM_ATIVO = :adm_ativo WHERE ADM_ID = :adm_id");
         $stmt->bindParam(':adm_nome', $adm_nome, PDO::PARAM_STR);

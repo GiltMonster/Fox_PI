@@ -148,6 +148,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <li><a href="../../index.php">Home</a></li>
                     <li><a href="../../pages/admin/painel_admin.php">Administradores</a></li>
                     <li><a href="./painel_produtos.php">Produtos</a></li>
+                    <li><a href="../categoria/painel_categoria.php">Categorias</a></li>
+                    <li><a href="../dados/painel_dados.php">Estatística</a></li>
                 </ul>
             </nav>
         </div>
@@ -179,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             if (!isset($categorias)) {
                                 echo "<option>Nenhuma categoria cadastrada</option>";
                             } else {
-                                echo "<option value=".$produto['CATEGORIA_ID'].">". $produto['CATEGORIA_NOME'] . "</option>";
+                                echo "<option value=" . $produto['CATEGORIA_ID'] . ">" . $produto['CATEGORIA_NOME'] . "</option>";
                                 foreach ($categorias as $categoria) : ?>
                                     <option value="<?php echo $categoria['CATEGORIA_ID']; ?>"><?php echo $categoria['CATEGORIA_NOME']; ?></option>
 
@@ -236,8 +238,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <input type="submit" value="Atualizar">
                 </form>
-            </div>
-            </form>
             </div>
         </section>
     </main>

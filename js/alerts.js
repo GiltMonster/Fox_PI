@@ -1,10 +1,16 @@
-var close = document.getElementsByClassName("closebtn");
-var i;
+let close = document.querySelector(".closebtn");
 
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function(){
-    var div = this.parentElement;
-    div.style.opacity = "0";
-    setTimeout(function(){ div.style.display = "none"; }, 600);
-  }
+let alert = document.querySelector(".alert");
+
+if (alert) {
+  setTimeout( () => {
+        alert.style.opacity = "0";
+        setTimeout(function () { alert.style.display = "none"; }, 600);
+  }, 4000);
 }
+
+close.addEventListener( `click`, () => {
+  alert.style.opacity = "0";
+  setTimeout(function () { alert.style.display = "none"; }, 200);
+})
+

@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // se o formulário foi submetido
     $adm_senha = $_POST['adm_senha']; // recebe senha
     $adm_ativo = isset($_POST['adm_ativo']) ? 1 : 0; //recebe informação se esta ativo
 
+    $adm_senha = password_hash($adm_senha, PASSWORD_DEFAULT);
 
     try {
         $sql = "INSERT INTO ADMINISTRADOR (ADM_NOME, ADM_EMAIL, ADM_SENHA, ADM_ATIVO) 
