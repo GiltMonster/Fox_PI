@@ -92,12 +92,12 @@ if (isset($_GET['logout'])) {
                     </div>
 
                     <div class="dados-numeros">
-                        <h3>Total de categorias <label style="color: #5BC452;">ATIVOS</label>:</h3>
+                        <h3>Total de categorias <label style="color: #5BC452;">ATIVAS</label>:</h3>
                         <label class="dados"><?= $qtd_categorias_ativas ?></label>
                     </div>
 
                     <div class="dados-numeros">
-                        <h3>Total de categorias <label style="color: #C45252;">DESATIVADOS</label>:</h3>
+                        <h3>Total de categorias <label style="color: #C45252;">DESATIVADAS</label>:</h3>
                         <label class="dados"><?= $qtd_categorias_desativadas ?></label>
                     </div>
 
