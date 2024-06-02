@@ -3,6 +3,7 @@
     display: grid; /* Define um contêiner de grid */
     grid-template-columns: repeat(2, 1fr); /* Cria duas colunas iguais */
     gap: 20px; /* Define o espaçamento entre os itens */
+    padding-bottom: 50px;    
 }
 
 .form-container form {
@@ -26,7 +27,6 @@
     border-radius: 4px; /* Arredonda os cantos */
     box-sizing: border-box; /* Inclui preenchimento e borda na largura total */
 }
-
 /* Estilos específicos para checkbox */
 .form-container .ativo {
     display: flex; /* Define um contêiner flexível */
@@ -82,13 +82,6 @@
 
 .form-container button:hover {
     background-color: #c82333; /* Define a cor de fundo ao passar o mouse */
-}
-
-/* Estilos para mensagem de sucesso */
-.msg-sucesso {
-    color: green; /* Define a cor do texto */
-    font-weight: bold; /* Define a fonte em negrito */
-    margin-top: 20px; /* Define a margem superior */
 }
 
 /* Estilos específicos para a estrutura do formulário */
@@ -182,20 +175,14 @@
 .url{
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: 10px;
+    width: 17%;
 }
 
-.url input[type="text"]{
-    width: 100%;
-}
+
 
 .ordem{
     display: flex;
     flex-direction: column;
-}
-
-.ordem input[type="number"]{
     width: 100%;
-    margin: 0;
 }
