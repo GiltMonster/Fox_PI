@@ -43,8 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             echo 'Erro ao executar a cadastrar estoque: ' . $e->getMessage();
         }
- var_dump($imagens);
- var_dump($imagem_ordens);
 
         if (isset($_FILES['imagem_url']['error']) && $_FILES['imagem_url']['error'][0] == 0) {
             //Inserindo imagens no BD
