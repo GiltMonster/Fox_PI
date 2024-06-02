@@ -30,6 +30,8 @@ include '../../php/categoria/editar_categoria.php';
                     <li><a href="../../index.php">Home</a></li>
                     <li><a href="../../pages/admin/painel_admin.php">Administradores</a></li>
                     <li><a href="../../pages/produto/painel_produtos.php">Produtos</a></li>
+                    <li><a href="../categoria/painel_categoria.php">Categorias</a></li>
+                    <li><a href="../dados/painel_dados.php">Estatística</a></li>
                 </ul>
             </nav>
         </div>
@@ -64,7 +66,7 @@ include '../../php/categoria/editar_categoria.php';
             </div>
         </section>
     </main>
-    
+
 </body>
 
 </html>

@@ -15,6 +15,7 @@ if (isset($_GET['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/dados/painel_dados.css">
+    <link rel="icon" href="../../favicon.ico" />
     <title>Dashboard</title>
 </head>
 
@@ -27,6 +28,8 @@ if (isset($_GET['logout'])) {
                     <li><a href="../../index.php">Home</a></li>
                     <li><a href="../admin/painel_admin.php">Administradores</a></li>
                     <li><a href="../produto/painel_produtos.php">Produtos</a></li>
+                    <li><a href="../categoria/painel_categoria.php">Categorias</a></li>
+                    <li><a href="../dados/painel_dados.php">Estatística</a></li>
                 </ul>
             </nav>
         </div>

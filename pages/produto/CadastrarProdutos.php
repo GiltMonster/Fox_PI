@@ -14,6 +14,7 @@ if (isset($_GET['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="../../style/produto/cadastrar_produtos.css">
+    <link rel="icon" href="../../favicon.ico" />
     <title>Cadastrar produtos</title>
 </head>
 
@@ -26,6 +27,8 @@ if (isset($_GET['logout'])) {
                     <li><a href="../../index.php">Home</a></li>
                     <li><a href="../../pages/admin/painel_admin.php">Administradores</a></li>
                     <li><a href="./painel_produtos.php">Produtos</a></li>
+                    <li><a href="../categoria/painel_categoria.php">Categorias</a></li>
+                    <li><a href="../dados/painel_dados.php">Estatística</a></li>
                 </ul>
             </nav>
         </div>
@@ -78,7 +81,7 @@ if (isset($_GET['logout'])) {
                     <div class="price-row">
                         <div class="preco">
                             <label for="preco">Preço do produto:</label>
-                            <input type="number" id="preco" name="preco" required step="0.1" min="0" placeholder="Exe: 110.25">
+                            <input type="number" id="preco" name="preco" required step="0.01" min="0" placeholder="Exe: 110.25">
                         </div>
                         <div class="desconto">
                             <label for="desconto">Desconto do produto:</label>
