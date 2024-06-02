@@ -98,15 +98,15 @@ if (isset($_GET['logout'])) {
                     </div>
 
                     <div id="containerImagens">
-                        <div class="imagem-input">
+                        <div class="imagem-input" id="imagem-input">
                             <div class="url">
-                                <label for="url">URL da imagem:</label>
-                                <input type="text" name="imagem_url[]" placeholder="URL da imagem" required>
+                                <label for="url">Selecione a imagem:</label>
+                                <input type="file" name="imagem_url[]" placeholder="URL da imagem">
                             </div>
 
                             <div class="ordem">
                                 <label for="ordem">Ordem:</label>
-                                <input type="number" name="imagem_ordem[]" placeholder="Ordem" min="1" required>
+                                <input type="number" name="imagem_ordem[]" placeholder="Ordem" min="1">
 
                             </div>
                         </div>
