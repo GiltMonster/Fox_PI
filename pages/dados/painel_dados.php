@@ -55,22 +55,22 @@ if (isset($_GET['logout'])) {
                 <div class="container-dados">
                     <div class="dados-numeros">
                         <h3>Qtd. dos produtos cadastrados:</h3>
-                        <label class="dados"><?= $qtd_produtos ?></label>
+                        <label class="<?= $classe_css_produtos ?>"><?= $qtd_produtos ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total em produtos <label style="color: #5BC452;">ATIVOS</label>:</h3>
-                        <label class="dados"><?= $qtd_produtos_ativos ?></label>
+                        <label class="<?= $classe_css_ativo ?>"><?= $qtd_produtos_ativos ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de produtos <label style="color: #C45252;">DESATIVADOS</label>:</h3>
-                        <label class="dados"><?= $qtd_produtos_desativados ?></label>
+                        <label class="<?= $classe_css_desativo ?>"><?= $qtd_produtos_desativados ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de produtos em estoque:</h3>
-                        <label class="dados"><?= $total_produtos_estoque ?></label>
+                        <label class="<?= $classe_css_estoque ?>"><?= $total_produtos_estoque ?></label>
                     </div>
 
                 </div>
@@ -88,17 +88,17 @@ if (isset($_GET['logout'])) {
                 <div class="container-dados">
                     <div class="dados-numeros">
                         <h3>Qtd das categorias cadastradas:</h3>
-                        <label class="dados"><?= $qtd_categorias ?></label>
+                        <label class="<?= $classe_css_categorias ?>"><?= $qtd_categorias ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de categorias <label style="color: #5BC452;">ATIVAS</label>:</h3>
-                        <label class="dados"><?= $qtd_categorias_ativas ?></label>
+                        <label class="<?= $classe_css_categoria_ativa?>"><?= $qtd_categorias_ativas ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de categorias <label style="color: #C45252;">DESATIVADAS</label>:</h3>
-                        <label class="dados"><?= $qtd_categorias_desativadas ?></label>
+                        <label class="<?= $classe_css_categoria_desativa?>"><?= $qtd_categorias_desativadas ?></label>
                     </div>
 
                     <div class="dados-numeros">
@@ -134,17 +134,17 @@ if (isset($_GET['logout'])) {
                 <div class="container-dados">
                     <div class="dados-numeros">
                         <h3>Total de vendas:</h3>
-                        <label class="dados"><?= $qtd_vendas ?></label>
+                        <label class="<?=$classe_css_vendas?>"><?= $qtd_vendas ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total de valor no estoque:</h3>
-                        <label class="dados-cifrao"><?= $total_valor_estoque ?></label>
+                        <label class="<?= $classe_css_valor_estoque?>"><?= $total_valor_estoque ?></label>
                     </div>
 
                     <div class="dados-numeros">
                         <h3>Total em valor das vendas:</h3>
-                        <label class="dados-cifrao"><?= $total_vendas ?></label>
+                        <label class="<?= $classe_css_total_vendas?>"><?= $total_vendas ?></label>
                     </div>
 
                     <div class="dados-numeros">

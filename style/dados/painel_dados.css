@@ -55,7 +55,13 @@
 .dados-erro {
   color: #ff3c3c;
   font-size: 2.5rem;
-  padding: 17% 0;
+  padding: 18%;
+}
+
+.dados-invalidos {
+  color: #ff3c3c;
+  font-size: 2rem;
+  padding: 20% 0;
 }
 
 .dados-erro-cat {

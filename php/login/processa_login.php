@@ -26,4 +26,6 @@ if ($query->rowCount() > 0) { //se retornar algum registro
     } else {
         header('Location: ../../pages/login/login.php?erro'); //redireciona para a página login.php com a mensagem de erro
     }
+} else {
+    header('Location: ../../pages/login/login.php?erro'); //redireciona para a página login.php com a mensagem de erro
 }
