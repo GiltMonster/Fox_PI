@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo "Erro ao selecionar o total de vendas";
     }
 
-    try{
+    try {
         $stmt = $pdo->prepare("SELECT SUM(PEDIDO_ITEM.ITEM_PRECO) FROM PEDIDO_ITEM;");
         $stmt->execute();
         $total_vendas = $stmt->fetchColumn();
@@ -113,15 +113,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     try {
-        $stmt = $pdo->prepare("SELECT PRODUTO.PRODUTO_NOME, PEDIDO_ITEM.ITEM_QTD FROM PEDIDO_ITEM 
-        JOIN PRODUTO ON PEDIDO_ITEM.PRODUTO_ID = PRODUTO.PRODUTO_ID
-            GROUP BY
-                PRODUTO.PRODUTO_NOME,
-                PEDIDO_ITEM.ITEM_QTD
-            ORDER BY
-                PEDIDO_ITEM.ITEM_QTD DESC
+        $stmt = $pdo->prepare("SELECT PEDIDO_ITEM.PRODUTO_ID, PRODUTO.PRODUTO_NOME, SUM(PEDIDO_ITEM.ITEM_QTD) AS 'ITEM_QTD' FROM PEDIDO_ITEM
+            INNER JOIN PRODUTO ON PRODUTO.PRODUTO_ID = PEDIDO_ITEM.PRODUTO_ID 
+            GROUP BY PEDIDO_ITEM.PRODUTO_ID 
+            ORDER BY SUM(PEDIDO_ITEM.ITEM_QTD) DESC, PEDIDO_ITEM.PRODUTO_ID 
             LIMIT 5;
             ");
+
         $stmt->execute();
         $produtos_mais_vendidos = $stmt->fetchAll();
     } catch (PDOException $e) {
@@ -130,7 +128,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 
 
-function reduzirString($string, $comprimentoDesejado = 15) {
+function reduzirString($string, $comprimentoDesejado = 15)
+{
     // Verifica se o comprimento da string é maior que o comprimento desejado
     if (strlen($string) > $comprimentoDesejado) {
         // Trunca a string ao comprimento desejado e adiciona "..."

@@ -9,9 +9,9 @@ if (!isset($_SESSION['admin_logado'])) { //se não existir a sessão admin_logad
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT * FROM PRODUTO 
-    LEFT JOIN CATEGORIA ON PRODUTO.CATEGORIA_ID = CATEGORIA.CATEGORIA_ID 
-    LEFT JOIN PRODUTO_ESTOQUE ON PRODUTO_ESTOQUE.PRODUTO_ID = PRODUTO.PRODUTO_ID;
+    $stmt = $pdo->prepare("SELECT PRODUTO.*, C.CATEGORIA_NOME, PE.PRODUTO_QTD FROM PRODUTO 
+    LEFT JOIN CATEGORIA C ON PRODUTO.CATEGORIA_ID = C.CATEGORIA_ID 
+    LEFT JOIN PRODUTO_ESTOQUE PE ON PE.PRODUTO_ID = PRODUTO.PRODUTO_ID;
     ");
     $stmt->execute();
     if ($stmt->rowCount() > 0) { //se retornar algum registro
