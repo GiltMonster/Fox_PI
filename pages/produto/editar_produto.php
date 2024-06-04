@@ -125,6 +125,7 @@ if (isset($_GET['logout'])) {
                     ?>
 
                     <input type="submit" value="Atualizar">
+                    <a href="./painel_produtos.php" class="cancel">Cancelar</a>
                 </form>
             </div>
         </section>
