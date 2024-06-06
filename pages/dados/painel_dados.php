@@ -110,7 +110,7 @@ if (isset($_GET['logout'])) {
                             echo "<ul>";
                             foreach ($categorias_mais_usadas as $categoria) :
                         ?>
-                                <li><?= $categoria['CATEGORIA_NOME'] ?> - <strong style="color: #f9a80c;"><?= $categoria['COUNT(PRODUTO.PRODUTO_ID)'] ?> qtd.</strong> </li>
+                                <li title="<?=$categoria['CATEGORIA_NOME']?>"><?= reduzirString($categoria['CATEGORIA_NOME']) ?> - <strong style="color: #f9a80c;"><?= $categoria['COUNT(PRODUTO.PRODUTO_ID)'] ?> qtd.</strong> </li>
                         <?php
                             endforeach;
                         }
@@ -156,7 +156,7 @@ if (isset($_GET['logout'])) {
                             echo "<ul>";
                             foreach ($produtos_mais_vendidos as $produto) :
                         ?>
-                                <li><?= reduzirString($produto['PRODUTO_NOME']) ?> - <strong style="color: #f9a80c;"><?= $produto['ITEM_QTD'] ?> qtd.</strong> </li>
+                                <li title="<?=$produto['PRODUTO_NOME']?>"><?= reduzirString($produto['PRODUTO_NOME']) ?> - <strong style="color: #f9a80c;"><?= $produto['ITEM_QTD'] ?> qtd.</strong> </li>
                         <?php endforeach;
                             echo "</ul>";
                         } ?>
