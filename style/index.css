@@ -152,6 +152,15 @@ svg {
   height: 50px;
 }
 
+.svg-painel {
+  fill: black;
+  transition: 0.5s;
+}
+
+.btn-produto:hover > .svg-painel{
+  fill: white;
+}
+
 .name-admin {
   font-size: 1.2em;
   font-weight: bold;
