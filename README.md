@@ -1,5 +1,5 @@
 
-![Logo-fox](https://media.discordapp.net/attachments/1012087339780145214/1242708521770942464/fox.png?ex=6669d8bf&is=6668873f&hm=bba3d704ca0536b516ba17309cb7f97cd9368f95ee71da919c245c3efd152d11&=&format=webp&quality=lossless&width=1174&height=1174)
+![Logo-fox](images/fox.svg)
 
 # Fox
 
